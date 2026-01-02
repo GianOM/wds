@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Doenca" format=3 uid="uid://ogcqnsgh5xeb"]
+
+[ext_resource type="Script" uid="uid://bayu1c1r6mrnh" path="res://Doencas/Sintomas_Resource.gd" id="1_r0ovn"]
+[ext_resource type="Script" uid="uid://cmjf1wht622im" path="res://Doencas/Remedios_Resource.gd" id="2_4hnd8"]
+[ext_resource type="Script" uid="uid://cfd1xktrqtkw1" path="res://Doencas/Doenca_Resource.gd" id="3_m7ia1"]
+
+[resource]
+script = ExtResource("3_m7ia1")
+Disease_Name = &"Xhyrtitis"
+Range_of_Symptoms = Vector2i(3, 6)
+Range_of_Cures = Vector2i(1, 2)
+metadata/_custom_type_script = "uid://cfd1xktrqtkw1"

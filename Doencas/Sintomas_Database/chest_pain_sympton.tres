@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Sintoma" format=3 uid="uid://bcq0xl364cljs"]
+
+[ext_resource type="Script" uid="uid://bayu1c1r6mrnh" path="res://Doencas/Sintomas_Resource.gd" id="1_qp1tq"]
+
+[resource]
+script = ExtResource("1_qp1tq")
+Symptom_Name = &"Chest Pain"
+Symptoms_Commonality = 0.03
+metadata/_custom_type_script = "uid://bayu1c1r6mrnh"

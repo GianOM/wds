@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Doenca" format=3 uid="uid://bwl5p1cecwcxr"]
+
+[ext_resource type="Script" uid="uid://bayu1c1r6mrnh" path="res://Doencas/Sintomas_Resource.gd" id="1_g7xm1"]
+[ext_resource type="Script" uid="uid://cmjf1wht622im" path="res://Doencas/Remedios_Resource.gd" id="2_vr081"]
+[ext_resource type="Script" uid="uid://cfd1xktrqtkw1" path="res://Doencas/Doenca_Resource.gd" id="3_um2ur"]
+
+[resource]
+script = ExtResource("3_um2ur")
+Disease_Name = &"Paranoah\'s Syndrome"
+Range_of_Symptoms = Vector2i(3, 6)
+Range_of_Cures = Vector2i(1, 2)
+metadata/_custom_type_script = "uid://cfd1xktrqtkw1"

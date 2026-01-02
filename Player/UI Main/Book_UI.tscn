@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://c26er124fn78f"]
+
+[ext_resource type="Script" uid="uid://bwkmk1potti35" path="res://Player/UI Main/Book_UI_Script.gd" id="1_xq4uv"]
+[ext_resource type="PackedScene" uid="uid://0b1wb6t12eg8" path="res://Player/UI Main/animated_book_2d.tscn" id="2_ufe46"]
+
+[node name="Book_UI" type="Control" unique_id=868782864]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_xq4uv")
+
+[node name="Close" type="Button" parent="." unique_id=1033530024]
+visible = false
+layout_mode = 0
+offset_left = 1094.0
+offset_top = 28.0
+offset_right = 1240.0
+offset_bottom = 96.0
+disabled = true
+text = "Close Book"
+
+[node name="Control" type="Control" parent="." unique_id=1321438858]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Book" parent="Control" unique_id=2144344677 instance=ExtResource("2_ufe46")]
+visible = false
+scale = Vector2(0.662963, 0.662963)
+
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]

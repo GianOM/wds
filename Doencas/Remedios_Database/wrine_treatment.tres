@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Remedio" format=3 uid="uid://dbvjdjdm4fssy"]
+
+[ext_resource type="Script" uid="uid://cmjf1wht622im" path="res://Doencas/Remedios_Resource.gd" id="1_ecxyf"]
+
+[resource]
+script = ExtResource("1_ecxyf")
+Treatment_Name = &"Wrine"
+metadata/_custom_type_script = "uid://cmjf1wht622im"

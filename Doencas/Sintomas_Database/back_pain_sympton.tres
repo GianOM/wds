@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Sintoma" format=3 uid="uid://cgn54v00q87ep"]
+
+[ext_resource type="Script" uid="uid://bayu1c1r6mrnh" path="res://Doencas/Sintomas_Resource.gd" id="1_71b3r"]
+
+[resource]
+script = ExtResource("1_71b3r")
+Symptom_Name = &"Back pain"
+Symptoms_Commonality = 0.03
+metadata/_custom_type_script = "uid://bayu1c1r6mrnh"

@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://12c1kqyqrqyj"]
+
+[ext_resource type="Script" uid="uid://dj0nco5t7wqpr" path="res://Player/playable_character_Controller.gd" id="1_sxeib"]
+[ext_resource type="PackedScene" uid="uid://b8ab6fnxmsdfm" path="res://Player/UI Main/Player_UI.tscn" id="2_q6p28"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_drl1l"]
+radius = 0.1
+height = 1.8110352
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sxeib"]
+radius = 0.1
+height = 1.8
+
+[node name="PlayableCharacter" type="CharacterBody3D" unique_id=1531290082]
+script = ExtResource("1_sxeib")
+
+[node name="PlayerUi" parent="." unique_id=2019658007 instance=ExtResource("2_q6p28")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=69370849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90268004, 0)
+shape = SubResource("CapsuleShape3D_drl1l")
+debug_color = Color(0.9954304, 0, 0.19708127, 1)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1043221531]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5664158, 0.13379413)
+cull_mask = 1
+current = true
+fov = 100.0
+near = 0.02
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1162259290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+layers = 2
+mesh = SubResource("CapsuleMesh_sxeib")

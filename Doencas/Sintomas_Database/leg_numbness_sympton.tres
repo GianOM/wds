@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Sintoma" format=3 uid="uid://btk583aygs50l"]
+
+[ext_resource type="Script" uid="uid://bayu1c1r6mrnh" path="res://Doencas/Sintomas_Resource.gd" id="1_muv2h"]
+
+[resource]
+script = ExtResource("1_muv2h")
+Symptom_Name = &"Leg Numbness"
+Symptoms_Commonality = 0.03
+metadata/_custom_type_script = "uid://bayu1c1r6mrnh"

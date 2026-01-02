@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Sintoma" format=3 uid="uid://v1rlvetwpf2y"]
+
+[ext_resource type="Script" uid="uid://bayu1c1r6mrnh" path="res://Doencas/Sintomas_Resource.gd" id="1_pq13w"]
+
+[resource]
+script = ExtResource("1_pq13w")
+Symptom_Name = &"Paralysis"
+Symptoms_Commonality = 0.03
+metadata/_custom_type_script = "uid://bayu1c1r6mrnh"

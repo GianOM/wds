@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://0b1wb6t12eg8"]
+
+[ext_resource type="Texture2D" uid="uid://bw237ecbw6ejs" path="res://Player/UI Main/book_open_half.png" id="1_mciwa"]
+[ext_resource type="Texture2D" uid="uid://dl1hf6i58f6s0" path="res://Player/UI Main/book_open.png" id="2_wofek"]
+[ext_resource type="Texture2D" uid="uid://ddgv5bh04q8h2" path="res://Player/UI Main/book_page_right.png" id="3_akfbi"]
+[ext_resource type="Texture2D" uid="uid://dsr5ketpekk3u" path="res://Player/UI Main/book_page_left.png" id="4_60vne"]
+[ext_resource type="Script" uid="uid://c4yfqy307wt1j" path="res://Player/UI Main/animated_book_2d.gd" id="5_atx3h"]
+[ext_resource type="Texture2D" uid="uid://bclgtfsblrp85" path="res://Player/UI Main/arrow.png" id="6_v6x3e"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_akfbi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wofek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_mciwa")
+}],
+"loop": false,
+"name": &"close_book",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mciwa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wofek")
+}],
+"loop": false,
+"name": &"open_book",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wofek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_60vne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_akfbi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wofek")
+}],
+"loop": false,
+"name": &"page_back",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wofek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_akfbi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_60vne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wofek")
+}],
+"loop": false,
+"name": &"page_next",
+"speed": 10.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=1179114360]
+sprite_frames = SubResource("SpriteFrames_akfbi")
+animation = &"page_next"
+script = ExtResource("5_atx3h")
+
+[node name="NextPage" type="TextureButton" parent="." unique_id=1969893283]
+visible = false
+offset_left = 443.0
+offset_top = 281.0
+offset_right = 510.0
+offset_bottom = 354.0
+disabled = true
+texture_normal = ExtResource("6_v6x3e")
+
+[node name="PreviousPage" type="TextureButton" parent="." unique_id=401779288]
+visible = false
+offset_left = -507.0
+offset_top = 281.0
+offset_right = -440.0
+offset_bottom = 354.0
+disabled = true
+texture_normal = ExtResource("6_v6x3e")
+flip_h = true
+
+[node name="LeftPage" type="RichTextLabel" parent="." unique_id=1299006613]
+offset_left = -510.0
+offset_top = -398.0
+offset_right = -22.0
+offset_bottom = 355.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+fit_content = true
+
+[node name="RigtPage" type="RichTextLabel" parent="." unique_id=455078309]
+offset_left = 18.0
+offset_top = -407.0
+offset_right = 506.0
+offset_bottom = 350.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+fit_content = true
+
+[connection signal="pressed" from="NextPage" to="." method="_on_next_page_pressed"]
+[connection signal="pressed" from="PreviousPage" to="." method="_on_previous_page_pressed"]
