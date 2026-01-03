@@ -110,3 +110,27 @@ theme_override_font_sizes/font_size = 25
 text = "0.0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Dinheiro_Total" type="Label" parent="." unique_id=485186140]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 55.0
+offset_right = 139.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Money: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Insatisfacao_Total" type="Label" parent="." unique_id=267405002]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 13.0
+offset_right = 261.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Insatisfação : 0 / 300"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -23,6 +23,9 @@ func Sintomas_em_Texto() -> String:
 	
 	var Return_Text: String = ""
 	
+	# Entregamos os sintomas em formato aleatorio pra evitar associacoes
+	List_of_Symptons.shuffle()
+	
 	for i in range(List_of_Symptons.size()):
 		Return_Text += "Sintoma " + str(i) + " : " + List_of_Symptons[i].Symptom_Name + "\n"
 	

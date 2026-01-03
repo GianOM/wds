@@ -23,6 +23,8 @@ var Total_Time: float = 0.0
 
 @onready var score: Label = $Score
 
+@onready var dinheiro_total: Label = $Dinheiro_Total
+@onready var insatisfacao_total: Label = $Insatisfacao_Total
 
 
 @warning_ignore("unused_parameter")
@@ -56,6 +58,7 @@ func _on_Book_Closed():
 
 func _ready() -> void:
 	
+	
 	book_ui.close.pressed.connect(_on_Book_Closed)
 	
 	
@@ -71,6 +74,9 @@ func _ready() -> void:
 	book_ui.Glossario_de_Doencas = glossario_resumo
 	
 	
+	dinheiro_total.text = "Money: $ " + str(ScoreManager.Dinheiro_Total)
+	insatisfacao_total.text = "Insatisfacao : " + str(ScoreManager.Score_de_Insatisfacao) + " / 300"
+	
 	
 func _process(delta: float) -> void:
 	
@@ -79,7 +85,8 @@ func _process(delta: float) -> void:
 	
 	score.text = "%d / %d" % [ScoreManager.Total_de_Acertos,ScoreManager.Total_de_Tentativas]
 	
-	
+	dinheiro_total.text = "Money: $ " + str(ScoreManager.Dinheiro_Total)
+	insatisfacao_total.text = "Insatisfacao : " + str(ScoreManager.Score_de_Insatisfacao) + " / 300"
 	
 	
 	
@@ -100,7 +107,7 @@ func _on_Remedio_Clicked(Remedio_Name: String):
 	
 	ScoreManager.Total_de_Tentativas += 1
 	
-	var Selected_Remedio: StringName = Remedio_Name
+	#var Selected_Remedio: StringName = Remedio_Name
 	Player_Selected_Medicine.emit(Remedio_Name)
 	
 	

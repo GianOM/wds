@@ -7,7 +7,7 @@ extends CharacterBody3D
 var Minha_Doenca: Doenca
 
 @onready var wait_untill_kill_timer: Timer = $Wait_Untill_Kill_Timer
-@onready var time_untill_death: Timer = $Time_Untill_Death
+@onready var time_untill_death: Timer = $Wait_Time_Timout
 
 @onready var time_untill_die: Label3D = $Time_Untill_Die
 
@@ -18,6 +18,7 @@ func _ready() -> void:
 	
 	
 	
+@warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	
 	
@@ -52,11 +53,12 @@ func _on_Medicine_Given(Medicine_Input_Name: String):
 	if Medicine_Result == true:
 		
 		debug_mesh.get_surface_override_material(0).set("albedo_color", Color(0.0, 1.0, 0.0, 1.0))
-		ScoreManager.Total_de_Acertos += 1
+		ScoreManager.Calcular_Recompensa_pela_Doenca_Curada(Minha_Doenca)
 		
 	else:
 		
-		debug_mesh.get_surface_override_material(0).set("albedo_color", Color(0.458, 0.458, 0.458, 1.0))
+		debug_mesh.get_surface_override_material(0).set("albedo_color", Color(0.857, 0.0, 0.179, 1.0))
+		ScoreManager.Score_de_Insatisfacao += 60
 		
 	wait_untill_kill_timer.start()
 	
@@ -66,8 +68,10 @@ func _on_Medicine_Given(Medicine_Input_Name: String):
 func _on_Kill_Timer_Timeout():
 	queue_free()
 	
-	
-	
+func _on_Wait_Time_Timeout():
+	ScoreManager.Score_de_Insatisfacao += 20
+	debug_mesh.get_surface_override_material(0).set("albedo_color", Color(0.88, 0.437, 0.153, 1.0))
+	wait_untill_kill_timer.start()
 	
 func _on_Player_Entered_my_Range(Player_Body: Node3D):
 	if Player_Body is Jogador:

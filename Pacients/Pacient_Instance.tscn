@@ -7,7 +7,7 @@ resource_local_to_scene = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o31nd"]
 resource_local_to_scene = true
-albedo_color = Color(0.78431374, 0, 0.101960786, 1)
+albedo_color = Color(0.46, 0.46, 0.46, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_o31nd"]
 height = 2.8168945
@@ -51,13 +51,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.401123, 0)
 shape = SubResource("CylinderShape3D_o31nd")
 
 [node name="Wait_Untill_Kill_Timer" type="Timer" parent="." unique_id=2141252141]
-wait_time = 5.0
+wait_time = 6.0
 
-[node name="Time_Untill_Death" type="Timer" parent="." unique_id=1135857456]
-wait_time = 50.0
+[node name="Wait_Time_Timout" type="Timer" parent="." unique_id=1135857456]
+wait_time = 10.0
+one_shot = true
 autostart = true
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_Player_Entered_my_Range"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_Player_Left_My_Range"]
 [connection signal="timeout" from="Wait_Untill_Kill_Timer" to="." method="_on_Kill_Timer_Timeout"]
-[connection signal="timeout" from="Time_Untill_Death" to="." method="_on_Kill_Timer_Timeout"]
+[connection signal="timeout" from="Wait_Time_Timout" to="." method="_on_Wait_Time_Timeout"]
