@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://cvog1aa5pvj6s"]
+
+[ext_resource type="Script" uid="uid://t3i8kvuyd733" path="res://Pacients/Pacient_Main_Script.gd" id="1_o31nd"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_astb7"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o31nd"]
+resource_local_to_scene = true
+albedo_color = Color(0.78431374, 0, 0.101960786, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_o31nd"]
+height = 2.8168945
+radius = 2.0078125
+
+[node name="PacientInstance" type="CharacterBody3D" unique_id=1624670727]
+script = ExtResource("1_o31nd")
+
+[node name="Debug_Mesh" type="MeshInstance3D" parent="." unique_id=1244330368]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9963317, 0)
+mesh = SubResource("CylinderMesh_astb7")
+surface_material_override/0 = SubResource("StandardMaterial3D_o31nd")
+
+[node name="Symptoms Text" type="Label3D" parent="." unique_id=2103174557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0044414997, 2.2609172, 0)
+visible = false
+pixel_size = 0.001
+billboard = 2
+no_depth_test = true
+texture_filter = 5
+text = "Sintomas:
+Obamna"
+font_size = 200
+outline_size = 60
+
+[node name="Time_Untill_Die" type="Label3D" parent="." unique_id=305818358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9559781, 1.3037231, 0)
+pixel_size = 0.001
+billboard = 2
+no_depth_test = true
+texture_filter = 5
+text = "50 s"
+font_size = 200
+outline_size = 60
+
+[node name="Area3D" type="Area3D" parent="." unique_id=905573342]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=596926475]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.401123, 0)
+shape = SubResource("CylinderShape3D_o31nd")
+
+[node name="Wait_Untill_Kill_Timer" type="Timer" parent="." unique_id=2141252141]
+wait_time = 5.0
+
+[node name="Time_Untill_Death" type="Timer" parent="." unique_id=1135857456]
+wait_time = 50.0
+autostart = true
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_Player_Entered_my_Range"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_Player_Left_My_Range"]
+[connection signal="timeout" from="Wait_Untill_Kill_Timer" to="." method="_on_Kill_Timer_Timeout"]
+[connection signal="timeout" from="Time_Untill_Death" to="." method="_on_Kill_Timer_Timeout"]

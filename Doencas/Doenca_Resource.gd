@@ -14,3 +14,17 @@ extends Resource
 ## significa que o total de Tratamentos Possiveis é entre 1 e 3 Sintomas
 @export var Range_of_Cures: Vector2i
 @export var Possible_Cure: Array[Remedio]
+
+
+
+
+
+func Sintomas_em_Texto() -> String:
+	
+	var Return_Text: String = ""
+	
+	for i in range(List_of_Symptons.size()):
+		Return_Text += "Sintoma " + str(i) + " : " + List_of_Symptons[i].Symptom_Name + "\n"
+	
+	
+	return Return_Text

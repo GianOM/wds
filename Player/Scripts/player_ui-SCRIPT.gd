@@ -1,6 +1,6 @@
 extends Control
 
-@onready var Debug_Symptoms: RichTextLabel = $Symptoms
+signal Player_Selected_Medicine(Medicine_Name: String)
 
 @onready var glossario_resumo: Array[String]
 @onready var indice: GridContainer = $Indice
@@ -22,8 +22,6 @@ var Total_Time: float = 0.0
 
 
 @onready var score: Label = $Score
-var Total_de_Tentativas: int = 0
-var Total_de_Acertos: int = 0
 
 
 
@@ -36,11 +34,15 @@ func _input(event: InputEvent) -> void:
 		if is_Booking_Showing:
 			
 			book_ui.close.pressed.emit()
+			indice.hide()
 			
 			
 		else:
 			book_ui.Open_Book()
 			is_Booking_Showing = true
+			
+			indice.show()
+			
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
 		
@@ -60,12 +62,9 @@ func _ready() -> void:
 	
 	Local_Sickness_DB = SicknessManager.Doencas_DB
 	Local_Remedios_DB = SicknessManager.Remedios_DB
-	
-	Debug_Symptoms.text = ""
 	#glossario_resumo.text = ""
 	
 	Load_Remedios_Nomes()
-	Load_Symptoms()
 	
 	
 	Write_Diseases()
@@ -78,58 +77,31 @@ func _process(delta: float) -> void:
 	Total_Time += delta
 	tempo_total.text = "%.2f" % Total_Time
 	
-	score.text = "%d / %d" % [Total_de_Acertos,Total_de_Tentativas]
+	score.text = "%d / %d" % [ScoreManager.Total_de_Acertos,ScoreManager.Total_de_Tentativas]
 	
 	
 	
-
-
-
-func Load_Symptoms():
-	
-	var Random_Number: int = Local_RNG.randi_range(0, 10)
-	Choosen_Disease = Local_Sickness_DB[Random_Number]
-	
-	Choosen_Disease.List_of_Symptons.shuffle()
-	
-	for i in range(Choosen_Disease.List_of_Symptons.size()):
-		Debug_Symptoms.text += "Sintoma " + str(i) + " : " + Choosen_Disease.List_of_Symptons[i].Symptom_Name + "\n"
 	
 	
 func Load_Remedios_Nomes():
-	for i in range(11):
-		
+	
+	for i in range(Local_Remedios_DB.size()):
 		var Temporary_Button: Button = indice.get_child(i)
 		Temporary_Button.pressed.connect(_on_Remedio_Clicked.bind(Temporary_Button.text))
 		
 		
 	
-
-func _on_Revelar_Doenca_button_Pressed():
-	Debug_Symptoms.text += "Resultado: " + Choosen_Disease.Disease_Name
 	
 	
 	
-func _on_ReRoll_Doenca_button_Pressed():
-	Debug_Symptoms.text = ""
-	
-	Load_Symptoms()
 	
 	
 func _on_Remedio_Clicked(Remedio_Name: String):
 	
-	Total_de_Tentativas += 1
+	ScoreManager.Total_de_Tentativas += 1
 	
 	var Selected_Remedio: StringName = Remedio_Name
-	
-	for meu_remedio in Choosen_Disease.Possible_Cure:
-		if meu_remedio.Treatment_Name == Selected_Remedio:
-			
-			Total_de_Acertos += 1
-			
-			_on_ReRoll_Doenca_button_Pressed()
-	
-	#print(Selected_Remedio)
+	Player_Selected_Medicine.emit(Remedio_Name)
 	
 	
 	

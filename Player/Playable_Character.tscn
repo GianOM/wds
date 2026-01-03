@@ -11,6 +11,9 @@ height = 1.8110352
 radius = 0.1
 height = 1.8
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_q6p28"]
+size = Vector3(1.5498047, 1.8137207, 1.8537598)
+
 [node name="PlayableCharacter" type="CharacterBody3D" unique_id=1531290082]
 script = ExtResource("1_sxeib")
 
@@ -32,3 +35,10 @@ near = 0.02
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 layers = 2
 mesh = SubResource("CapsuleMesh_sxeib")
+
+[node name="Pacient_Detection_Zone" type="Area3D" parent="." unique_id=1892152103]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pacient_Detection_Zone" unique_id=266967624]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90515137, -0.7236849)
+shape = SubResource("BoxShape3D_q6p28")

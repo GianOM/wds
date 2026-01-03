@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://hqhpgf4k8tei"]
+
+[ext_resource type="Script" uid="uid://bottlw1qna5jt" path="res://Pacients/Pacients_manager.gd" id="1_gdb8o"]
+
+[node name="Pacients_Manager" type="Node3D" unique_id=1675392447]
+script = ExtResource("1_gdb8o")
+
+[node name="Spawn_Timer" type="Timer" parent="." unique_id=1501850435]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="Spawn_Timer" to="." method="_on_Spawn_Timer_Timeout"]

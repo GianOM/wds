@@ -12,6 +12,8 @@ var Doencas_DB: Array
 var Remedios_DB: Array
 var Sintomas_DB: Array
 
+var Decider_RNG: RandomNumberGenerator = RandomNumberGenerator.new()
+
 
 func Load_Resources_into_Array(folder_path: String) -> Array:
 	
@@ -40,7 +42,7 @@ func Retorna_Index_do_Sintoma(Lista_de_Sintomas: Array) -> int:
 	for sintoma in Lista_de_Sintomas:
 		Peso_Total_dos_Sintomas += sintoma.Symptoms_Commonality
 	
-	var Decider_RNG: RandomNumberGenerator = RandomNumberGenerator.new()
+	
 	var Random_Float: float = Decider_RNG.randf_range(0, Peso_Total_dos_Sintomas)
 	
 	var i: int = 0
@@ -59,8 +61,6 @@ func Retorna_Index_do_Sintoma(Lista_de_Sintomas: Array) -> int:
 func Montar_Possiveis_Doencas() -> void:
 	
 	var remedio_iter: int = 0
-	var Decider_RNG: RandomNumberGenerator = RandomNumberGenerator.new()
-	
 	
 	
 	for minha_doenca in Doencas_DB:
@@ -75,8 +75,6 @@ func Montar_Possiveis_Doencas() -> void:
 			
 			var Temp_Sintoma: Sintoma = Local_Symptoms_Copy.pop_at(Clamped_Index)
 			minha_doenca.List_of_Symptons.append(Temp_Sintoma)
-			
-			
 			
 			
 			
@@ -108,5 +106,13 @@ func _ready() -> void:
 	Montar_Possiveis_Doencas()
 	
 	Diseases_Loaded.emit()
+	
+	
+	
+func Draw_Sickness_from_Pool() -> Doenca:
+	
+	var Doenca_Index: int = Decider_RNG.randi_range(0, Doencas_DB.size()-1)
+	return Doencas_DB[Doenca_Index]
+	
 	
 	

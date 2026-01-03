@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://12c1kqyqrqyj" path="res://Player/Playable_Character.tscn" id="1_comex"]
 [ext_resource type="PackedScene" uid="uid://dqxcwmctsuyxq" path="res://Ambientes/Main Room/Main Room Models.glb" id="2_pm0r7"]
+[ext_resource type="PackedScene" uid="uid://hqhpgf4k8tei" path="res://Pacients/Pacients_Manager_Scene.tscn" id="3_aybpn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_comex"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -101,5 +102,7 @@ shape = SubResource("ConcavePolygonShape3D_aybpn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Main Room Models/Walls Entrance/StaticBody3D" unique_id=567406296]
 shape = SubResource("ConcavePolygonShape3D_qv324")
+
+[node name="Pacients_Manager" parent="." unique_id=1675392447 instance=ExtResource("3_aybpn")]
 
 [editable path="Main Room Models"]
