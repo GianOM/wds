@@ -16,6 +16,18 @@ radius = 2.0078125
 [node name="PacientInstance" type="CharacterBody3D" unique_id=1624670727]
 script = ExtResource("1_o31nd")
 
+[node name="Pacient_NavAgent" type="NavigationAgent3D" parent="." unique_id=579579769]
+path_desired_distance = 0.25
+target_desired_distance = 0.25
+path_max_distance = 2.01
+path_metadata_flags = 0
+simplify_path = true
+path_search_max_polygons = 1024
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.9294517, 2.8300881e-05, 0.65475553, 1)
+debug_path_custom_point_size = 5.0
+
 [node name="Debug_Mesh" type="MeshInstance3D" parent="." unique_id=1244330368]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9963317, 0)
 mesh = SubResource("CylinderMesh_astb7")
@@ -51,10 +63,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.401123, 0)
 shape = SubResource("CylinderShape3D_o31nd")
 
 [node name="Wait_Untill_Kill_Timer" type="Timer" parent="." unique_id=2141252141]
-wait_time = 6.0
+wait_time = 3.0
 
 [node name="Wait_Time_Timout" type="Timer" parent="." unique_id=1135857456]
-wait_time = 10.0
+wait_time = 60.0
 one_shot = true
 autostart = true
 

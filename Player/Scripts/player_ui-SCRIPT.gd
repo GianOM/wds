@@ -118,19 +118,18 @@ func Write_Diseases():
 		
 		var Temporary_Text: String = ""
 	#
-		Temporary_Text += Local_Sickness_DB[i].Disease_Name + " : \n"
+		Temporary_Text += "[b]%s[/b]\n" % Local_Sickness_DB[i].Disease_Name
 	#
-		Temporary_Text += "Sintomas -> "
+		#Temporary_Text += "Sintomas -> "
 		#
 		for meu_sintoma in Local_Sickness_DB[i].List_of_Symptons:
-			Temporary_Text  += meu_sintoma.Symptom_Name + "  "
+			Temporary_Text  += "[ul]%s[/ul]\n" % meu_sintoma.Symptom_Name
 			#
-		Temporary_Text += "\n"
 		
-		Temporary_Text  += "Tratamentos -> "
+		#Temporary_Text  += "Tratamentos -> "
 		#
 		for minhas_curas in Local_Sickness_DB[i].Possible_Cure:
-			Temporary_Text  += minhas_curas.Treatment_Name + "  "
+			Temporary_Text  += "[color=green][i]%s[/i][/color]\n" % minhas_curas.Treatment_Name
 			
 		Temporary_Text  += "\n"
 		Temporary_Text  += "\n"

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://12c1kqyqrqyj" path="res://Player/Playable_Character.tscn" id="1_comex"]
 [ext_resource type="PackedScene" uid="uid://dqxcwmctsuyxq" path="res://Ambientes/Main Room/Main Room Models.glb" id="2_pm0r7"]
 [ext_resource type="PackedScene" uid="uid://hqhpgf4k8tei" path="res://Pacients/Pacients_Manager_Scene.tscn" id="3_aybpn"]
+[ext_resource type="NavigationMesh" uid="uid://b423ywtfb4uy1" path="res://Pacients/OfficeNavMesh.tres" id="4_e2ln7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_comex"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -56,7 +57,7 @@ shadow_enabled = true
 [node name="PlayableCharacter" parent="." unique_id=1531290082 instance=ExtResource("1_comex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002298355, 0.025694609, -7.544421)
 
-[node name="Main Room Models" parent="." unique_id=2008812089 instance=ExtResource("2_pm0r7")]
+[node name="Main Room Models" parent="." unique_id=2008812089 groups=["NavMeshGroup"] instance=ExtResource("2_pm0r7")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Main Room Models/Table" parent_id_path=PackedInt32Array(2008812089, 1456461933) index="0" unique_id=2000408573]
 
@@ -104,5 +105,26 @@ shape = SubResource("ConcavePolygonShape3D_aybpn")
 shape = SubResource("ConcavePolygonShape3D_qv324")
 
 [node name="Pacients_Manager" parent="." unique_id=1675392447 instance=ExtResource("3_aybpn")]
+
+[node name="Main_Office_Navigation_Zone" type="NavigationRegion3D" parent="." unique_id=1862104724]
+navigation_mesh = ExtResource("4_e2ln7")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="Main_Office_Navigation_Zone" unique_id=1998934138 groups=["NavMeshGroup"]]
+height = 4.0
+vertices = PackedVector3Array(-10.963882, 0, -17.225937, -7.3034964, 0, -17.225937, -7.203212, 0, -5.4174304, -11.716016, 0, -5.3672895)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="NavigationObstacle3D2" type="NavigationObstacle3D" parent="Main_Office_Navigation_Zone" unique_id=1282018442 groups=["NavMeshGroup"]]
+height = 4.0
+vertices = PackedVector3Array(-11.490644, 0, -2.2802677, -1.6869273, 0, -2.1696992, -1.7606387, 0, 2.0134654, -11.122084, 0, 1.7186174)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="NavigationObstacle3D3" type="NavigationObstacle3D" parent="Main_Office_Navigation_Zone" unique_id=2054890884 groups=["NavMeshGroup"]]
+height = 4.0
+vertices = PackedVector3Array(1.8195971, 0, -2.189135, 1.9301661, 0, 1.2753356, 10.904622, 0, 1.2569079, 10.941476, 0, -2.2259912)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
 
 [editable path="Main Room Models"]

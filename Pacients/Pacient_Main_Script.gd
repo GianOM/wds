@@ -1,6 +1,10 @@
 class_name Paciente
 extends CharacterBody3D
 
+@onready var pacient_nav_agent: NavigationAgent3D = $Pacient_NavAgent
+var has_move_target: bool = false
+var next_path_position: Vector3 = Vector3.ZERO
+
 @onready var debug_mesh: MeshInstance3D = $Debug_Mesh
 @onready var symptoms_text: Label3D = $"Symptoms Text"
 
@@ -11,10 +15,11 @@ var Minha_Doenca: Doenca
 
 @onready var time_untill_die: Label3D = $Time_Untill_Die
 
+
 func _ready() -> void:
 	Add_new_Sickness()
-	
-	
+	pacient_nav_agent.target_position = Vector3(0,0,-32)
+	#next_path_position = pacient_nav_agent.get_next_path_position()
 	
 	
 	
@@ -23,9 +28,22 @@ func _physics_process(delta: float) -> void:
 	
 	
 	time_untill_die.text = " %.2f s" % time_untill_death.time_left
-
 	
-	pass
+	if has_move_target:
+		next_path_position = pacient_nav_agent.get_next_path_position()
+		var movement_direction: Vector3 = global_position.direction_to(next_path_position)
+		
+		velocity = movement_direction * 3.0
+		
+		move_and_slide()
+		
+		if pacient_nav_agent.is_navigation_finished():
+			has_move_target = false
+			
+			if wait_untill_kill_timer.is_stopped():
+				wait_untill_kill_timer.start()
+			
+		
 	
 func Add_new_Sickness():
 	
@@ -60,8 +78,8 @@ func _on_Medicine_Given(Medicine_Input_Name: String):
 		debug_mesh.get_surface_override_material(0).set("albedo_color", Color(0.857, 0.0, 0.179, 1.0))
 		ScoreManager.Score_de_Insatisfacao += 60
 		
-	wait_untill_kill_timer.start()
 	
+	has_move_target = true
 	
 	
 	

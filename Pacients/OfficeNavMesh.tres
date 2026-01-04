@@ -1,0 +1,10 @@
+[gd_resource type="NavigationMesh" format=3 uid="uid://b423ywtfb4uy1"]
+
+[resource]
+vertices = PackedVector3Array(-8.558392, 0.06306383, -17.991398, -6.5583916, 0.06306383, -15.991398, -1.5583916, 0.06306383, -17.991398, 2.4416084, 0.06306383, -21.991398, 3.4416084, 0.06306383, -18.991398, 9.441608, 0.06306383, -18.991398, 9.441608, 0.06306383, -32.991398, -1.5583916, 0.06306383, -21.991398, -8.558392, 0.06306383, -32.991398, -1.5583916, 0.06306383, -2.9913979, 0.44160843, 0.06306383, -0.99139786, 1.4416084, 0.06306383, -2.9913979, -6.5583916, 0.06306383, -4.991398, -8.558392, 0.06306383, -2.9913979, 9.441608, 0.06306383, -2.9913979)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(2, 0, 7), PackedInt32Array(7, 0, 8), PackedInt32Array(7, 8, 3), PackedInt32Array(3, 8, 6), PackedInt32Array(11, 10, 9), PackedInt32Array(9, 13, 12), PackedInt32Array(9, 12, 11), PackedInt32Array(4, 1, 2), PackedInt32Array(12, 1, 11), PackedInt32Array(11, 1, 4), PackedInt32Array(5, 14, 4), PackedInt32Array(4, 14, 11)]
+geometry_source_geometry_mode = 1
+geometry_source_group_name = &"NavMeshGroup"
+cell_size = 1.0
+cell_height = 0.05
+vertices_per_polygon = 4.0

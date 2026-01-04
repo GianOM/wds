@@ -1,7 +1,7 @@
 extends AnimatedSprite2D
 
 var ENTRIES: int
-var ENTRIES_PER_PAGE: int = 3
+var ENTRIES_PER_PAGE: int = 2
 
 @onready var next_page: TextureButton = $NextPage
 @onready var previous_page: TextureButton = $PreviousPage

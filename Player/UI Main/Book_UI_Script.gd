@@ -18,7 +18,7 @@ func Glossario_Setado(Array_de_Entrada: Array):
 	
 	
 func Open_Book() -> void:
-	book.visible = true
+	book.show()
 	book.play("open_book")
 	close.disabled = false
 	close.visible = true
@@ -56,7 +56,7 @@ func _on_close_pressed() -> void:
 	close.visible = false
 	book.play("close_book")
 	await book.animation_finished
-	book.visible = false
+	book.hide()
 	
 	
 	book.reset_pages()

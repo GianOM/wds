@@ -27,7 +27,7 @@ func Sintomas_em_Texto() -> String:
 	List_of_Symptons.shuffle()
 	
 	for i in range(List_of_Symptons.size()):
-		Return_Text += "Sintoma " + str(i) + " : " + List_of_Symptons[i].Symptom_Name + "\n"
+		Return_Text += List_of_Symptons[i].Symptom_Name + "\n"
 	
 	
 	return Return_Text
