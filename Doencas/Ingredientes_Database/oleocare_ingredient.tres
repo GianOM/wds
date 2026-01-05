@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Ingrediente" format=3 uid="uid://cjax68k4p8l8a"]
+
+[ext_resource type="Script" uid="uid://ccilb5evgiu6k" path="res://Doencas/Ingrediente_Resource.gd" id="1_tbuuc"]
+
+[resource]
+script = ExtResource("1_tbuuc")
+Ingredient_Name = &"Oleocare"
+Quantidade = 10
+metadata/_custom_type_script = "uid://ccilb5evgiu6k"

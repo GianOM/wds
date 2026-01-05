@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Ingrediente" format=3 uid="uid://br0dsiowt6h64"]
+
+[ext_resource type="Script" uid="uid://ccilb5evgiu6k" path="res://Doencas/Ingrediente_Resource.gd" id="1_i82d4"]
+
+[resource]
+script = ExtResource("1_i82d4")
+Ingredient_Name = &"Lavendryl"
+Quantidade = 10
+metadata/_custom_type_script = "uid://ccilb5evgiu6k"

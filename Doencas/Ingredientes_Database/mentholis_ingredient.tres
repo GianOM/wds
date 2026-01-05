@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Ingrediente" format=3 uid="uid://cpibveyac1w60"]
+
+[ext_resource type="Script" uid="uid://ccilb5evgiu6k" path="res://Doencas/Ingrediente_Resource.gd" id="1_j13mv"]
+
+[resource]
+script = ExtResource("1_j13mv")
+Ingredient_Name = &"Mentholis"
+Quantidade = 10
+metadata/_custom_type_script = "uid://ccilb5evgiu6k"

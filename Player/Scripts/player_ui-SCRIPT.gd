@@ -126,13 +126,12 @@ func Write_Diseases():
 			Temporary_Text  += "[ul]%s[/ul]\n" % meu_sintoma.Symptom_Name
 			#
 		
-		#Temporary_Text  += "Tratamentos -> "
 		#
-		for minhas_curas in Local_Sickness_DB[i].Possible_Cure:
-			Temporary_Text  += "[color=green][i]%s[/i][/color]\n" % minhas_curas.Treatment_Name
+		#for minhas_curas in Local_Sickness_DB[i].Possible_Cure:
+			#Temporary_Text  += "[color=green][i]%s[/i][/color]\n" % minhas_curas.Treatment_Name
 			
 		Temporary_Text  += "\n"
-		Temporary_Text  += "\n"
+		#Temporary_Text  += "\n"
 		
 		glossario_resumo.append(Temporary_Text)
 		

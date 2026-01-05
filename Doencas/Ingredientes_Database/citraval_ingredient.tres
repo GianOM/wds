@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Ingrediente" format=3 uid="uid://oys03ckiltad"]
+
+[ext_resource type="Script" uid="uid://ccilb5evgiu6k" path="res://Doencas/Ingrediente_Resource.gd" id="1_v15d5"]
+
+[resource]
+script = ExtResource("1_v15d5")
+Ingredient_Name = &"Citraval"
+Quantidade = 10
+metadata/_custom_type_script = "uid://ccilb5evgiu6k"

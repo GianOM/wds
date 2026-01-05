@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Ingrediente" format=3 uid="uid://vp3wty6lulgw"]
+
+[ext_resource type="Script" uid="uid://ccilb5evgiu6k" path="res://Doencas/Ingrediente_Resource.gd" id="1_ci5lt"]
+
+[resource]
+script = ExtResource("1_ci5lt")
+Ingredient_Name = &"Zingivex"
+Quantidade = 10
+metadata/_custom_type_script = "uid://ccilb5evgiu6k"

@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="Remedio" format=3 uid="uid://dy26uaq53s71d"]
 
+[ext_resource type="Script" uid="uid://ccilb5evgiu6k" path="res://Doencas/Ingrediente_Resource.gd" id="1_8xwyg"]
 [ext_resource type="Script" uid="uid://cmjf1wht622im" path="res://Doencas/Remedios_Resource.gd" id="1_jjnca"]
 
 [resource]
 script = ExtResource("1_jjnca")
 Treatment_Name = &"Dikyn"
+Range_de_Ingredientes = Vector2i(2, 5)
 metadata/_custom_type_script = "uid://cmjf1wht622im"

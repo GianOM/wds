@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="Remedio" format=3 uid="uid://bwff8rv8fvph3"]
 
+[ext_resource type="Script" uid="uid://ccilb5evgiu6k" path="res://Doencas/Ingrediente_Resource.gd" id="1_cp55o"]
 [ext_resource type="Script" uid="uid://cmjf1wht622im" path="res://Doencas/Remedios_Resource.gd" id="1_nd4rs"]
 
 [resource]
 script = ExtResource("1_nd4rs")
 Treatment_Name = &"Sphyrone"
+Range_de_Ingredientes = Vector2i(2, 5)
 metadata/_custom_type_script = "uid://cmjf1wht622im"

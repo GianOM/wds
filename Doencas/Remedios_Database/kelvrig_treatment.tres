@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="Remedio" format=3 uid="uid://b5pkv42go4oee"]
 
 [ext_resource type="Script" uid="uid://cmjf1wht622im" path="res://Doencas/Remedios_Resource.gd" id="1_8adto"]
+[ext_resource type="Script" uid="uid://ccilb5evgiu6k" path="res://Doencas/Ingrediente_Resource.gd" id="1_8o1tk"]
 
 [resource]
 script = ExtResource("1_8adto")
 Treatment_Name = &"Kelvrig"
+Range_de_Ingredientes = Vector2i(2, 5)
 metadata/_custom_type_script = "uid://cmjf1wht622im"

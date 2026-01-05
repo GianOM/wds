@@ -1,0 +1,160 @@
+[gd_scene format=3 uid="uid://dlat2nvnjf0hk"]
+
+[ext_resource type="Script" uid="uid://cncb75k7fq4d2" path="res://Player/UI Main/remedio_craft_ui.gd" id="1_es74i"]
+
+[node name="RemedioCraftUI" type="Control" unique_id=324546077]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_es74i")
+
+[node name="Ingredient_List" type="RichTextLabel" parent="." unique_id=436075806]
+clip_contents = false
+layout_mode = 0
+offset_left = 393.0
+offset_top = 364.0
+offset_right = 1212.0
+offset_bottom = 609.0
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "Aloephar
+Aloephar                                   
+Citraval 
+Glicosalva
+Lavendryl"
+fit_content = true
+
+[node name="Ingredients Title" type="Label" parent="Ingredient_List" unique_id=754134130]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -336.5
+offset_top = -88.0
+offset_right = -89.5
+offset_bottom = -25.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 45
+text = "Ingredients"
+
+[node name="Held _ Required Text" type="Label" parent="Ingredient_List" unique_id=1337532127]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 124.0
+offset_top = -88.0
+offset_right = 462.0
+offset_bottom = -25.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 45
+text = "Held / Required"
+
+[node name="Make Remedio Button" type="Button" parent="Ingredient_List" unique_id=404619570]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -171.0
+offset_top = 15.0
+offset_right = 47.0
+offset_bottom = 87.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 27
+text = "Craft and Mine"
+
+[node name="Held_vs_Required_Text" type="RichTextLabel" parent="Ingredient_List" unique_id=265483965]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -284.0
+offset_right = 48.0
+offset_bottom = 489.0
+grow_horizontal = 0
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "x 5 / x1
+x 5 / x1
+x 5 / x1
+x 5 / x1
+x 5 / x1"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=903682596]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 16.0
+offset_right = 365.0
+offset_bottom = 686.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBox_de_Remedios" type="VBoxContainer" parent="." unique_id=1371378104]
+layout_mode = 0
+offset_left = 19.0
+offset_right = 338.0
+offset_bottom = 733.0
+alignment = 1
+
+[node name="Remedio1" type="Button" parent="VBox_de_Remedios" unique_id=393062484]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Akma"
+
+[node name="Remedio2" type="Button" parent="VBox_de_Remedios" unique_id=598823979]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Akma"
+
+[node name="Remedio3" type="Button" parent="VBox_de_Remedios" unique_id=473790782]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Akma"
+
+[node name="Remedio4" type="Button" parent="VBox_de_Remedios" unique_id=1425418651]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Akma"
+
+[node name="Remedio5" type="Button" parent="VBox_de_Remedios" unique_id=964957946]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Akma"
+
+[node name="Remedio6" type="Button" parent="VBox_de_Remedios" unique_id=733442477]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Akma"
+
+[node name="Remedio7" type="Button" parent="VBox_de_Remedios" unique_id=75474121]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Akma"
+
+[node name="Remedio8" type="Button" parent="VBox_de_Remedios" unique_id=1996848342]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Akma"
+
+[node name="Remedio9" type="Button" parent="VBox_de_Remedios" unique_id=1326526808]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Akma"
+
+[node name="Remedio10" type="Button" parent="VBox_de_Remedios" unique_id=645292408]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Akma"
+
+[node name="Remedio11" type="Button" parent="VBox_de_Remedios" unique_id=1293913307]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Akma"
+
+[connection signal="pressed" from="Ingredient_List/Make Remedio Button" to="." method="_on_Craft_Button_Pressed"]

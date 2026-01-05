@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="Remedio" format=3 uid="uid://bicy2tay5jidh"]
 
+[ext_resource type="Script" uid="uid://ccilb5evgiu6k" path="res://Doencas/Ingrediente_Resource.gd" id="1_n5iwb"]
 [ext_resource type="Script" uid="uid://cmjf1wht622im" path="res://Doencas/Remedios_Resource.gd" id="1_xhpic"]
 
 [resource]
 script = ExtResource("1_xhpic")
 Treatment_Name = &"Suffen"
+Range_de_Ingredientes = Vector2i(2, 5)
 metadata/_custom_type_script = "uid://cmjf1wht622im"

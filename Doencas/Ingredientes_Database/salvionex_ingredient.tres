@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Ingrediente" format=3 uid="uid://ci455v0qk0aws"]
+
+[ext_resource type="Script" uid="uid://ccilb5evgiu6k" path="res://Doencas/Ingrediente_Resource.gd" id="1_ctq3b"]
+
+[resource]
+script = ExtResource("1_ctq3b")
+Ingredient_Name = &"Salvionex"
+Quantidade = 10
+metadata/_custom_type_script = "uid://ccilb5evgiu6k"
