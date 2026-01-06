@@ -17,14 +17,16 @@ var Local_RNG: RandomNumberGenerator = RandomNumberGenerator.new()
 var Choosen_Disease: Doenca
 
 
-@onready var tempo_total: Label = $"Tempo Total"
+@onready var tempo_total: Label = $"In_Game_Metrics/Tempo Total"
 var Total_Time: float = 0.0
 
 
-@onready var score: Label = $Score
+@onready var score: Label = $In_Game_Metrics/Score
+@onready var dinheiro_total: Label = $In_Game_Metrics/Dinheiro_Total
+@onready var insatisfacao_total: Label = $In_Game_Metrics/Insatisfacao_Total
 
-@onready var dinheiro_total: Label = $Dinheiro_Total
-@onready var insatisfacao_total: Label = $Insatisfacao_Total
+@onready var remedio_craft_ui: Control = $RemedioCraftUI
+@onready var in_game_metrics: Control = $In_Game_Metrics
 
 
 @warning_ignore("unused_parameter")
@@ -33,16 +35,22 @@ func _input(event: InputEvent) -> void:
 		
 	if Input.is_action_just_pressed("Book_Key"):
 		
+		Load_Remedios_Nomes()
+		
 		if is_Booking_Showing:
 			
+			
+			book_ui.hide()
 			book_ui.close.pressed.emit()
 			indice.hide()
 			
 			
 		else:
-			book_ui.Open_Book()
+			
 			is_Booking_Showing = true
 			
+			book_ui.show()
+			book_ui.Open_Book()
 			indice.show()
 			
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -53,15 +61,25 @@ func _on_Book_Closed():
 	is_Booking_Showing = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-
-
-
+func Show_Recipes():
+	remedio_craft_ui.show()
+	in_game_metrics.hide()
+	
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+func Hide_Recipes():
+	remedio_craft_ui.hide()
+	in_game_metrics.show()
+	
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	
+	
+	
 func _ready() -> void:
 	
 	
 	book_ui.close.pressed.connect(_on_Book_Closed)
-	
-	
 	
 	Local_Sickness_DB = SicknessManager.Doencas_DB
 	Local_Remedios_DB = SicknessManager.Remedios_DB
@@ -94,12 +112,21 @@ func Load_Remedios_Nomes():
 	
 	for i in range(Local_Remedios_DB.size()):
 		var Temporary_Button: Button = indice.get_child(i)
-		Temporary_Button.pressed.connect(_on_Remedio_Clicked.bind(Temporary_Button.text))
+		
+		var Temp_Remedio: Remedio = Local_Remedios_DB[i]
+		
+		Temporary_Button.text = "%s x%d" % [Temp_Remedio.Treatment_Name, Temp_Remedio.Quantidade]
+		
+		if Temp_Remedio.Quantidade < 1:
+			Temporary_Button.disabled = true
+		else:
+			Temporary_Button.disabled = false
 		
 		
-	
-	
-	
+		
+		if not Temporary_Button.pressed.is_connected(_on_Remedio_Clicked):
+			Temporary_Button.pressed.connect(_on_Remedio_Clicked.bind(Temp_Remedio.Treatment_Name))
+		
 	
 	
 	
@@ -110,7 +137,20 @@ func _on_Remedio_Clicked(Remedio_Name: String):
 	#var Selected_Remedio: StringName = Remedio_Name
 	Player_Selected_Medicine.emit(Remedio_Name)
 	
+	Subtrai_Unidade_de_Remedio(Remedio_Name)
+	Load_Remedios_Nomes()
 	
+	
+func Subtrai_Unidade_de_Remedio(Remedio_Name: String):
+	
+	for meu_remedio in Local_Remedios_DB:
+		if meu_remedio.Treatment_Name == Remedio_Name:
+			meu_remedio.Quantidade -= 1
+			
+			SicknessManager.Quantidade_de_Remedio_Changed.emit()
+			
+			return
+			
 	
 	
 func Write_Diseases():
@@ -124,14 +164,8 @@ func Write_Diseases():
 		#
 		for meu_sintoma in Local_Sickness_DB[i].List_of_Symptons:
 			Temporary_Text  += "[ul]%s[/ul]\n" % meu_sintoma.Symptom_Name
-			#
-		
-		#
-		#for minhas_curas in Local_Sickness_DB[i].Possible_Cure:
-			#Temporary_Text  += "[color=green][i]%s[/i][/color]\n" % minhas_curas.Treatment_Name
 			
 		Temporary_Text  += "\n"
-		#Temporary_Text  += "\n"
 		
 		glossario_resumo.append(Temporary_Text)
 		

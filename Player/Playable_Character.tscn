@@ -17,6 +17,23 @@ size = Vector3(1.5498047, 1.8137207, 1.8537598)
 [node name="PlayableCharacter" type="CharacterBody3D" unique_id=1531290082]
 script = ExtResource("1_sxeib")
 
+[node name="Debug UI" type="Control" parent="." unique_id=1624859416]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -236.0
+offset_bottom = 138.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="Global_Position_Debug" type="RichTextLabel" parent="Debug UI" unique_id=1526949185]
+layout_mode = 0
+offset_left = -24.0
+offset_right = 235.0
+offset_bottom = 40.0
+fit_content = true
+
 [node name="PlayerUi" parent="." unique_id=2019658007 instance=ExtResource("2_q6p28")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=69370849]
@@ -42,3 +59,6 @@ collision_layer = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pacient_Detection_Zone" unique_id=266967624]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90515137, -0.7236849)
 shape = SubResource("BoxShape3D_q6p28")
+
+[node name="Player_NavAgent" type="NavigationAgent3D" parent="." unique_id=184902596]
+avoidance_enabled = true

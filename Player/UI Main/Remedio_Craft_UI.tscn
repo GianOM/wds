@@ -12,12 +12,13 @@ grow_vertical = 2
 script = ExtResource("1_es74i")
 
 [node name="Ingredient_List" type="RichTextLabel" parent="." unique_id=436075806]
+visible = false
 clip_contents = false
 layout_mode = 0
 offset_left = 393.0
-offset_top = 364.0
+offset_top = 354.0
 offset_right = 1212.0
-offset_bottom = 609.0
+offset_bottom = 599.0
 theme_override_font_sizes/normal_font_size = 35
 bbcode_enabled = true
 text = "Aloephar
@@ -60,14 +61,15 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -171.0
-offset_top = 15.0
-offset_right = 47.0
-offset_bottom = 87.0
+offset_left = -164.0
+offset_top = 25.0
+offset_right = 54.0
+offset_bottom = 107.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 27
-text = "Craft and Mine"
+text = "Craft and Mine
+(Space)"
 
 [node name="Held_vs_Required_Text" type="RichTextLabel" parent="Ingredient_List" unique_id=265483965]
 layout_mode = 1
@@ -76,8 +78,9 @@ anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -284.0
 offset_right = 48.0
-offset_bottom = 489.0
+offset_bottom = 256.0
 grow_horizontal = 0
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 35
 bbcode_enabled = true
 text = "x 5 / x1
@@ -86,6 +89,21 @@ x 5 / x1
 x 5 / x1
 x 5 / x1"
 horizontal_alignment = 1
+
+[node name="Doencas_Trataveis" type="RichTextLabel" parent="Ingredient_List" unique_id=1820600683]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -411.5
+offset_top = -332.0
+offset_right = 453.5
+offset_bottom = -84.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+bbcode_enabled = true
+fit_content = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=903682596]
 layout_mode = 0

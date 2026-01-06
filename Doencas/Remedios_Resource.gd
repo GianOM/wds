@@ -7,8 +7,10 @@ extends Resource
 
 @export var Quantidade: int = 0
 
-## Bula do Remedio
-@export var leaflet: String
+## Lista_das_Doencas que este remedio trata. Precisamos saber destes valores
+## para que na criação do Crafting, ele possa retornar pra nos
+@export var Lista_de_Doencas: Array[StringName] 
+
 
 
 @export_category("Ingredientes")

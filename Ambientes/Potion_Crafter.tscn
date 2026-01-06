@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cxjgrgqqsv8s"]
+
+[ext_resource type="Script" uid="uid://wkj6dodq1qwy" path="res://Ambientes/potion_crafter_Code.gd" id="1_6wvox"]
+[ext_resource type="PackedScene" uid="uid://drrd35f42mut4" path="res://Ambientes/Main Room/Cauldron.glb" id="1_g1kqs"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g1kqs"]
+radius = 0.91675174
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g1kqs"]
+size = Vector3(2.7050781, 1.6514282, 2.6936035)
+
+[node name="PotionCrafter" type="Node3D" unique_id=1088692397]
+script = ExtResource("1_6wvox")
+
+[node name="Cauldron2" parent="." unique_id=851064020 instance=ExtResource("1_g1kqs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1394942, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cauldron2" unique_id=1662897754]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cauldron2/StaticBody3D" unique_id=1008919832]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4154657, 0)
+shape = SubResource("SphereShape3D_g1kqs")
+
+[node name="Player_Area_Detection" type="Area3D" parent="." unique_id=1758375718]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player_Area_Detection" unique_id=1780824762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823822, 0)
+shape = SubResource("BoxShape3D_g1kqs")
+
+[connection signal="body_entered" from="Player_Area_Detection" to="." method="_on_Player_Enter_Ranger"]
+[connection signal="body_exited" from="Player_Area_Detection" to="." method="_on_Player_Left_Range"]

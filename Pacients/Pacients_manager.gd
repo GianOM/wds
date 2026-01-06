@@ -3,23 +3,37 @@ extends Node3D
 
 const PACIENT_INSTANCE = preload("uid://cvog1aa5pvj6s")
 
-const Minimum_Coordinates_XZ: Vector2 = Vector2(-10.0,0)
-const Maximum_Coordinates_XZ: Vector2 = Vector2(10.0,-32)
+
+@onready var main_office_navigation_zone: NavigationRegion3D = $"../Main_Office_Navigation_Zone"
 
 var RNG_Main: RandomNumberGenerator = RandomNumberGenerator.new()
 
+var Next_Spawn_Point: Vector3
+
+var Main_Nav_Zone_RID: RID 
+
+
+
+func _ready() -> void:
+	
+	Main_Nav_Zone_RID = main_office_navigation_zone.get_rid()
+	
+	
+@warning_ignore("unused_parameter")
+func _physics_process(delta: float) -> void:
+	
+	Next_Spawn_Point = NavigationServer3D.region_get_random_point(Main_Nav_Zone_RID,1,false)
+	
+	
+	
 func _on_Spawn_Timer_Timeout():
 	
-	print("NEW PACIENT ARRIVED")
-	
-	var New_Pacient: Paciente = PACIENT_INSTANCE.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
+	var New_Pacient: Paciente = PACIENT_INSTANCE.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
 	add_child(New_Pacient)
 	
-	var New_Pacient_Spawn_X_Position: float = RNG_Main.randf_range(Minimum_Coordinates_XZ.x,
-															Maximum_Coordinates_XZ.x)
-															
-	var New_Pacient_Spawn_Z_Position: float = RNG_Main.randf_range(Minimum_Coordinates_XZ.y,
-															Maximum_Coordinates_XZ.y)
 	
-	New_Pacient.global_position = Vector3(New_Pacient_Spawn_X_Position, 0.0, New_Pacient_Spawn_Z_Position)
+	New_Pacient.global_position = Next_Spawn_Point
+	
+	New_Pacient.call_deferred("Set_Fila_Target", Vector3(3.397,0.003,-12.448))
+	
 	

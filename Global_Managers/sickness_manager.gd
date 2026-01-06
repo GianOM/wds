@@ -2,6 +2,9 @@ extends Node
 
 signal Diseases_Loaded
 
+@warning_ignore("unused_signal")
+signal Quantidade_de_Remedio_Changed
+
 
 var DOENCAS_FOLDER_PATH: String = "res://Doencas/Doencas_Database/"
 var SINTOMAS_FOLDER_PATH: String = "res://Doencas/Sintomas_Database/"
@@ -119,7 +122,10 @@ func Montar_Possiveis_Doencas() -> void:
 		# numero de tratamentos é definido pela Classe Doenca
 		for j in range(Decider_RNG.randi_range(minha_doenca.Range_of_Cures.x, minha_doenca.Range_of_Cures.y)):
 			
-			minha_doenca.Possible_Cure.append(Remedios_DB[remedio_iter])
+			var Temp_Remedio: Remedio = Remedios_DB[remedio_iter]
+			
+			minha_doenca.Possible_Cure.append(Temp_Remedio)
+			Temp_Remedio.Lista_de_Doencas.append(minha_doenca.Disease_Name) #Precisamos saber as doencas que cada Remedio e capaz de curar
 			
 			if (remedio_iter+1) == Remedios_DB.size():
 				remedio_iter = 0
@@ -135,6 +141,8 @@ func Montar_os_Ingredientes_dos_Remedios():
 	var ingrediente_iter: int = 0
 	
 	for meu_remedio in Remedios_DB:
+		
+		meu_remedio.Quantidade = 99
 		
 		for i in range(Decider_RNG.randi_range(meu_remedio.Range_de_Ingredientes.x, meu_remedio.Range_de_Ingredientes.y)):
 			

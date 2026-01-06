@@ -16,11 +16,14 @@ var Lista_Local_de_Remedios: Array
 var Current_Remedio_Index: int
 
 
+@onready var doencas_trataveis: RichTextLabel = $Ingredient_List/Doencas_Trataveis
+
 func _ready() -> void:
 	
 	Lista_Local_de_Remedios = SicknessManager.Remedios_DB
+	
+	SicknessManager.Quantidade_de_Remedio_Changed.connect(Inicializar_Lista_de_Remedios)
 	Inicializar_Lista_de_Remedios()
-	pass
 	
 	
 	
@@ -29,7 +32,7 @@ func Inicializar_Lista_de_Remedios():
 	
 	for i in range(Lista_Local_de_Remedios.size()):
 		var Temp_Button: Button = v_box_de_remedios.get_child(i)
-		Temp_Button.text = Lista_Local_de_Remedios[i].Treatment_Name + "   x%d" % Lista_Local_de_Remedios[i].Quantidade
+		Temp_Button.text = "%s   x%d" % [Lista_Local_de_Remedios[i].Treatment_Name, Lista_Local_de_Remedios[i].Quantidade]
 		
 		
 		if not Temp_Button.pressed.has_connections():
@@ -49,9 +52,14 @@ func _on_Remedio_Clicked(Remedio_Index: int):
 	
 	var Lista_de_Remedios: String = ""
 	var Quantidade_de_Remedios: String = ""
+	var Doencas_Tratadas_Pelo_Remedio: String = ""
+	#
+	for minha_doenca in Remedio_Selected.Lista_de_Doencas:
+		Doencas_Tratadas_Pelo_Remedio  += "[color=green][i]%s[/i][/color]\n" % minha_doenca
+		
+		
+	doencas_trataveis.text = Doencas_Tratadas_Pelo_Remedio
 	
-	# Sempre que clickarmos num remedio, habilitamos o botao. Caso
-	# alguma condicao impeca de craftar, ela sera desabilitada no loop a seguir
 	
 	Enable_Craft_Button()
 	

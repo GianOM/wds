@@ -12,20 +12,21 @@ var mouse_axis: Vector2 = Vector2.ZERO
 
 var is_Player_Active: bool = false
 
+
+@onready var global_position_debug: RichTextLabel = $"Debug UI/Global_Position_Debug"
+
 func _input(event: InputEvent) -> void:
 		
 	
 	if event is InputEventMouseMotion and is_Player_Active:
 		# event.relative is the delta since the last mouse motion event
 		
-		if player_ui.is_Booking_Showing:
+		if player_ui.is_Booking_Showing or player_ui.remedio_craft_ui.is_visible_in_tree():
 			return
 		
 		
 		mouse_axis = event.relative * PLAYER_CAMERA_SPEED
 		handle_Camera_Movement()
-		
-		return
 		
 	
 	
@@ -58,6 +59,8 @@ func Kill_the_Player():
 func _process(delta: float) -> void:
 	handle_Player_Movement(delta)
 	
+	global_position_debug.text = str(global_position)
+	
 	
 	
 	
@@ -83,7 +86,7 @@ func handle_Player_Movement(Delta_Time: float):
 func handle_Camera_Movement():
 	
 	camera_3d.rotation.x -= mouse_axis.y
-	camera_3d.rotation.x = clamp(camera_3d.rotation.x, -1.4, 1.5)
+	camera_3d.rotation.x = clamp(camera_3d.rotation.x, -1.5, 1.5)
 	
 	rotation.y -= mouse_axis.x
 	
