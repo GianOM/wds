@@ -20,8 +20,19 @@ tonemap_mode = 1
 tonemap_exposure = 0.85
 ssao_enabled = true
 
+[sub_resource type="Curve3D" id="Curve3D_sjkx1"]
+bake_interval = 1.75
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.8914993, 0, -12.164575, -0.85569286, 0, 0.91613674, 0.85569286, 0, -0.91613674, 4.8914404, 0, -13.098519, 0.79452705, 0, 0.16867924, -0.79452705, 0, -0.16867924, 4.8914404, 0, -14.626791, 0.9400923, 0, 0.30630302, -0.9400923, 0, -0.30630302, -4.8725185, 0, -14.626791, -0.8024683, 0, 0.036920547, 0.8024683, 0, -0.036920547, -4.8725185, 0, -16.607883, -0.013604164, 0, 1.0039349, 0.013604164, 0, -1.0039349, 0.13681674, 0, -17.032402, 2.19992, 0, 0.89274406, -2.19992, 0, -0.89274406, -0.030394256, 0, -31.994694, 0, 0, 0, 0, 0, 0, -17.626564, 0, -31.917686),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 8
+
 [node name="Main_Office" type="Node3D" unique_id=1164666822]
 script = ExtResource("1_sjkx1")
+
+[node name="PlayableCharacter" parent="." unique_id=1531290082 instance=ExtResource("1_comex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002298355, 0.025694609, -7.544421)
 
 [node name="ShamanOffice00" parent="." unique_id=555434082 groups=["NavMeshGroup"] instance=ExtResource("2_sjkx1")]
 
@@ -43,10 +54,30 @@ directional_shadow_blend_splits = true
 directional_shadow_max_distance = 498.5
 sky_mode = 1
 
-[node name="PlayableCharacter" parent="." unique_id=1531290082 instance=ExtResource("1_comex")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002298355, 0.025694609, -7.544421)
+[node name="NPCs Spawn_Points" type="Node3D" parent="." unique_id=1395546254]
 
-[node name="Pacients_Manager" parent="." unique_id=1675392447 instance=ExtResource("3_aybpn")]
+[node name="Spawn_Point_00" type="Marker3D" parent="NPCs Spawn_Points" unique_id=800368532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.19487, 0, 0)
+gizmo_extents = 10.0
+
+[node name="Spawn_Point_01" type="Marker3D" parent="NPCs Spawn_Points" unique_id=641497143]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.1724415, 0, 0)
+gizmo_extents = 10.0
+
+[node name="Spawn_Point_02" type="Marker3D" parent="NPCs Spawn_Points" unique_id=84286956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.1724415, 0, -30.438509)
+gizmo_extents = 10.0
+
+[node name="Spawn_Point_03" type="Marker3D" parent="NPCs Spawn_Points" unique_id=39666553]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.540625, 0, -30.438509)
+gizmo_extents = 10.0
+
+[node name="Fila_de_Pacientes" type="Path3D" parent="." unique_id=1922190436]
+curve = SubResource("Curve3D_sjkx1")
+
+[node name="Pacients_Manager" parent="." unique_id=1675392447 node_paths=PackedStringArray("fila_path", "Pacients_Spawn_Points") instance=ExtResource("3_aybpn")]
+fila_path = NodePath("../Fila_de_Pacientes")
+Pacients_Spawn_Points = [NodePath("../NPCs Spawn_Points/Spawn_Point_00"), NodePath("../NPCs Spawn_Points/Spawn_Point_01"), NodePath("../NPCs Spawn_Points/Spawn_Point_02"), NodePath("../NPCs Spawn_Points/Spawn_Point_03")]
 
 [node name="Main_Office_Navigation_Zone" type="NavigationRegion3D" parent="." unique_id=1862104724]
 navigation_mesh = ExtResource("4_e2ln7")

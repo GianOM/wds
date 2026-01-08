@@ -17,7 +17,6 @@ grow_amount = 0.05
 stencil_mode = 3
 stencil_flags = 1
 stencil_compare = 5
-stencil_reference = 0
 metadata/_stencil_owned = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o31nd"]
@@ -27,7 +26,6 @@ next_pass = SubResource("StandardMaterial3D_astb7")
 albedo_color = Color(0.46, 0.46, 0.46, 1)
 stencil_mode = 1
 stencil_flags = 2
-stencil_reference = 0
 stencil_outline_thickness = 0.05
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_o31nd"]
@@ -47,7 +45,6 @@ path_max_distance = 8.01
 path_metadata_flags = 0
 simplify_path = true
 avoidance_enabled = true
-radius = 0.25
 max_neighbors = 8
 debug_enabled = true
 debug_use_custom = true
@@ -90,11 +87,11 @@ collision_layer = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.401123, 0)
 shape = SubResource("CylinderShape3D_o31nd")
 
-[node name="Wait_Untill_Kill_Timer" type="Timer" parent="." unique_id=2141252141]
+[node name="Go_Home_Timer" type="Timer" parent="." unique_id=2141252141]
 wait_time = 3.0
 
-[node name="Wait_Time_Timout" type="Timer" parent="." unique_id=1135857456]
-wait_time = 60.0
+[node name="Death_Timer" type="Timer" parent="." unique_id=1135857456]
+wait_time = 75.0
 one_shot = true
 autostart = true
 
@@ -102,8 +99,8 @@ autostart = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9958496, 0)
 shape = SubResource("CapsuleShape3D_o31nd")
 
-[connection signal="velocity_computed" from="Pacient_NavAgent" to="." method="on_avoidance_velocity_computed"]
-[connection signal="body_entered" from="Area3D" to="." method="_on_Player_Entered_my_Range"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_Player_Left_My_Range"]
-[connection signal="timeout" from="Wait_Untill_Kill_Timer" to="." method="_on_Kill_Timer_Timeout"]
-[connection signal="timeout" from="Wait_Time_Timout" to="." method="_on_Wait_Time_Timeout"]
+[connection signal="velocity_computed" from="Pacient_NavAgent" to="." method="_on_avoidance_velocity_computed"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_player_entered_range"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_player_left_range"]
+[connection signal="timeout" from="Go_Home_Timer" to="." method="_on_kill_timer_timeout"]
+[connection signal="timeout" from="Death_Timer" to="." method="_on_death_timer_timeout"]

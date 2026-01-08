@@ -6,7 +6,6 @@ signal Player_Selected_Medicine(Medicine_Name: String)
 @onready var indice: GridContainer = $Indice
 
 @onready var book_ui: Control = $Book_UI
-var is_Booking_Showing: bool = false
 
 
 var Local_Sickness_DB: Array
@@ -35,9 +34,13 @@ func _input(event: InputEvent) -> void:
 		
 	if Input.is_action_just_pressed("Book_Key"):
 		
+		if remedio_craft_ui.is_visible_in_tree():
+			remedio_craft_ui.hide()
+		
+		
 		Load_Remedios_Nomes()
 		
-		if is_Booking_Showing:
+		if book_ui.is_visible_in_tree():
 			
 			
 			book_ui.hide()
@@ -47,18 +50,31 @@ func _input(event: InputEvent) -> void:
 			
 		else:
 			
-			is_Booking_Showing = true
 			
 			book_ui.show()
 			book_ui.Open_Book()
 			indice.show()
 			
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			
+	elif Input.is_action_just_pressed("Recipe_Book_Key"):
+		
+		if book_ui.is_visible_in_tree():
+			book_ui.hide()
+			book_ui.close.pressed.emit()
+			indice.hide()
+		
+		if remedio_craft_ui.is_visible_in_tree():
+			remedio_craft_ui.hide()
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			
+		else:
+			remedio_craft_ui.show()
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
 		
 
 func _on_Book_Closed():
-	is_Booking_Showing = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func Show_Recipes():

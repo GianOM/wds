@@ -21,7 +21,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and is_Player_Active:
 		# event.relative is the delta since the last mouse motion event
 		
-		if player_ui.is_Booking_Showing or player_ui.remedio_craft_ui.is_visible_in_tree():
+		if player_ui.book_ui.is_visible_in_tree() or player_ui.remedio_craft_ui.is_visible_in_tree():
 			return
 		
 		

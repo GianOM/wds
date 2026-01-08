@@ -1,166 +1,178 @@
 class_name Paciente
 extends CharacterBody3D
 
+signal Death_Signal
+
+# Constants
+const MOVEMENT_SPEED: float = 3.0
+const WRONG_MEDICINE_PENALTY: int = 60
+const TIMEOUT_PENALTY: int = 20
+
+var HOME_POSITION: Vector3 
+
+# Enums
 enum PacientState {
-	Sick,
-	Treated
-	}
+	SICK,
+	TREATED
+}
 
-var My_Current_State: PacientState = PacientState.Sick
-
-
-@onready var pacient_nav_agent: NavigationAgent3D = $Pacient_NavAgent
+# State
+var current_state: PacientState = PacientState.SICK
+var sickness: Doenca
 var has_move_target: bool = false
 var next_path_position: Vector3 = Vector3.ZERO
 
+# Node references
+@onready var nav_agent: NavigationAgent3D = $Pacient_NavAgent
 @onready var debug_mesh: MeshInstance3D = $Debug_Mesh
-@onready var symptoms_text: Label3D = $"Symptoms Text"
+@onready var symptoms_label: Label3D = $"Symptoms Text"
+@onready var time_label: Label3D = $Time_Untill_Die
 
-var Minha_Doenca: Doenca
-
-@onready var wait_untill_kill_timer: Timer = $Wait_Untill_Kill_Timer
-@onready var time_untill_death: Timer = $Wait_Time_Timout
-
-@onready var time_untill_die: Label3D = $Time_Untill_Die
-
+@onready var kill_timer: Timer = $Go_Home_Timer
+@onready var death_timer: Timer = $Death_Timer
 
 @onready var mesh_collision: CollisionShape3D = $Mesh_Collision
 
 
-
 func _ready() -> void:
-	Add_new_Sickness()
-	
-	var Random_Color: Color = Color(randf(), randf(), randf())
-	
-	pacient_nav_agent.set("debug_path_custom_color", Random_Color)
-	debug_mesh.get_surface_override_material(0).set("stencil_color", Random_Color)
-	
-	
-func Set_Fila_Target(Initial_NavMesh_Position: Vector3):
-	
-	
-	await get_tree().physics_frame
-	
-	has_move_target = true
-	pacient_nav_agent.target_position = Initial_NavMesh_Position
-	next_path_position = pacient_nav_agent.get_next_path_position()
-	
-	
-	
-	
-@warning_ignore("unused_parameter")
-func _physics_process(delta: float) -> void:
-	
-	time_untill_die.text = " %.2f s" % time_untill_death.time_left
+	_initialize_patient()
+	_setup_visual_debugging()
+
+
+func _physics_process(_delta: float) -> void:
+	_update_time_display()
 	
 	if has_move_target:
-		
-		next_path_position = pacient_nav_agent.get_next_path_position()
-		var movement_direction: Vector3 = global_position.direction_to(next_path_position)
-		
-		if pacient_nav_agent.get_avoidance_enabled():
-			
-			pacient_nav_agent.set_velocity(movement_direction * 3.0)
-			
-		else:
-			on_avoidance_velocity_computed( movement_direction * 3.0)
-		
-		
-		move_and_slide()
-		
-		if pacient_nav_agent.is_navigation_finished():
-			
-			has_move_target = false
-			
-			if wait_untill_kill_timer.is_stopped() and My_Current_State == PacientState.Treated:
-				wait_untill_kill_timer.start()
-			
-			
-			
-# o Codigo do NavMesh computa uma velocidade safe usando avoidance
-func on_avoidance_velocity_computed(New_Safe_Velocity: Vector3):
-	velocity = New_Safe_Velocity
-			
-			
+		_process_movement()
+
+
+# Initialization
+func _initialize_patient() -> void:
+	sickness = SicknessManager.Draw_Sickness_from_Pool().duplicate_deep()
+	symptoms_label.text = sickness.Sintomas_em_Texto()
+
+
+func _setup_visual_debugging() -> void:
+	var random_color: Color = Color(randf(), randf(), randf())
+	nav_agent.set("debug_path_custom_color", random_color)
+	_set_mesh_color(random_color, true)
+
+
+# Movement
+func set_target_position(target: Vector3) -> void:
+	has_move_target = true
+	nav_agent.target_position = target
+	next_path_position = nav_agent.get_next_path_position()
+
+
+func _process_movement() -> void:
+	next_path_position = nav_agent.get_next_path_position()
+	var direction: Vector3 = global_position.direction_to(next_path_position)
+	var target_velocity: Vector3 = direction * MOVEMENT_SPEED
 	
-func Add_new_Sickness():
-	
-	Minha_Doenca = SicknessManager.Draw_Sickness_from_Pool().duplicate_deep()
-	symptoms_text.text = Minha_Doenca.Sintomas_em_Texto()
-	
-	
-	
-	
-func Compare_Medicine_With_Sickness(Medicine_Input_Name: String) -> bool:
-	
-	for Cura in Minha_Doenca.Possible_Cure:
-		if Cura.Treatment_Name == Medicine_Input_Name:
-			return true
-	
-	return false
-	
-func _on_Medicine_Given(Medicine_Input_Name: String):
-	
-	
-	
-	var Medicine_Result: bool = Compare_Medicine_With_Sickness(Medicine_Input_Name)
-	
-	if Medicine_Result == true:
-		
-		debug_mesh.get_surface_override_material(0).set("albedo_color", Color(0.0, 1.0, 0.0, 1.0))
-		ScoreManager.Calcular_Recompensa_pela_Doenca_Curada(Minha_Doenca)
-		
+	if nav_agent.get_avoidance_enabled():
+		nav_agent.set_velocity(target_velocity)
 	else:
-		
-		debug_mesh.get_surface_override_material(0).set("albedo_color", Color(0.857, 0.0, 0.179, 1.0))
-		ScoreManager.Score_de_Insatisfacao += 60
-		
-		
-		
-		
-	time_untill_death.stop()
+		_on_avoidance_velocity_computed(target_velocity)
 	
-	Go_Home()
+	move_and_slide()
 	
+	if nav_agent.is_navigation_finished():
+		_on_navigation_finished()
+
+
+func _on_avoidance_velocity_computed(safe_velocity: Vector3) -> void:
+	velocity = safe_velocity
+
+
+func _on_navigation_finished() -> void:
+	has_move_target = false
 	
-func Go_Home():
+	if kill_timer.is_stopped() and current_state == PacientState.TREATED:
+		kill_timer.start()
+
+
+# Medicine treatment
+func _on_medicine_given(medicine_name: String) -> void:
+	var is_correct: bool = _is_medicine_correct(medicine_name)
+	
+	if is_correct:
+		_handle_correct_treatment()
+	else:
+		_handle_wrong_treatment()
+	
+	death_timer.stop()
+	_go_home()
+
+
+func _is_medicine_correct(medicine_name: String) -> bool:
+	for cure in sickness.Possible_Cure:
+		if cure.Treatment_Name == medicine_name:
+			return true
+	return false
+
+
+func _handle_correct_treatment() -> void:
+	_set_debug_color(Color.GREEN)
+	ScoreManager.Calcular_Recompensa_pela_Doenca_Curada(sickness)
+
+
+func _handle_wrong_treatment() -> void:
+	_set_debug_color(Color(0.857, 0.0, 0.179))
+	ScoreManager.Score_de_Insatisfacao += WRONG_MEDICINE_PENALTY
+
+
+# Navigation
+func _go_home() -> void:
+	
+	Death_Signal.emit()
 	
 	mesh_collision.disabled = true
-	
-	pacient_nav_agent.target_position = Vector3(-16.587,
-												0.003,
-												0.4)
-												
-												
-												
+	nav_agent.target_position = HOME_POSITION
 	has_move_target = true
-	
-	My_Current_State = PacientState.Treated
-	
-	
-	
-func _on_Kill_Timer_Timeout():
+	current_state = PacientState.TREATED
+
+
+# Visual feedback
+func _set_mesh_color(color: Color, use_stencil: bool = false) -> void:
+	var material: Material = debug_mesh.get_surface_override_material(0)
+	if use_stencil:
+		material.set("stencil_color", color)
+	else:
+		material.set("albedo_color", color)
+
+
+func _set_debug_color(color: Color) -> void:
+	debug_mesh.get_surface_override_material(0).set("albedo_color", color)
+
+
+func _update_time_display() -> void:
+	time_label.text = " %.2f s" % death_timer.time_left
+
+
+# Player interaction
+func _on_player_entered_range(body: Node3D) -> void:
+	if body is Jogador:
+		symptoms_label.show()
+		body.player_ui.Player_Selected_Medicine.connect(_on_medicine_given)
+
+
+func _on_player_left_range(body: Node3D) -> void:
+	if body is Jogador:
+		symptoms_label.hide()
+		body.player_ui.Player_Selected_Medicine.disconnect(_on_medicine_given)
+
+
+# Timer callbacks
+func start_kill_timer() -> void:
+	kill_timer.start()
+
+
+func _on_kill_timer_timeout() -> void:
 	queue_free()
-	
-func _on_Wait_Time_Timeout():
-	ScoreManager.Score_de_Insatisfacao += 20
-	debug_mesh.get_surface_override_material(0).set("albedo_color", Color(0.88, 0.437, 0.153, 1.0))
-	
-	Go_Home()
-	
-func _on_Player_Entered_my_Range(Player_Body: Node3D):
-	if Player_Body is Jogador:
-		symptoms_text.show()
-		Player_Body.player_ui.Player_Selected_Medicine.connect(_on_Medicine_Given)
-	
-	
-func _on_Player_Left_My_Range(Player_Body: Node3D):
-	if Player_Body is Jogador:
-		symptoms_text.hide()
-		Player_Body.player_ui.Player_Selected_Medicine.disconnect(_on_Medicine_Given)
-	
-	
-	
-	
-	
+
+
+func _on_death_timer_timeout() -> void:
+	ScoreManager.Score_de_Insatisfacao += TIMEOUT_PENALTY
+	_set_debug_color(Color(0.88, 0.437, 0.153))
+	_go_home()

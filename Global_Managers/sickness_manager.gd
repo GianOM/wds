@@ -142,7 +142,8 @@ func Montar_os_Ingredientes_dos_Remedios():
 	
 	for meu_remedio in Remedios_DB:
 		
-		meu_remedio.Quantidade = 99
+		#WARNING: Usado apenas para debuggar
+		#meu_remedio.Quantidade = 99
 		
 		for i in range(Decider_RNG.randi_range(meu_remedio.Range_de_Ingredientes.x, meu_remedio.Range_de_Ingredientes.y)):
 			
