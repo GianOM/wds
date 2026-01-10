@@ -32,6 +32,7 @@ var next_path_position: Vector3 = Vector3.ZERO
 @onready var death_timer: Timer = $Death_Timer
 
 @onready var mesh_collision: CollisionShape3D = $Mesh_Collision
+@onready var outline_meshes: Node3D = $Outline_Meshes
 
 
 func _ready() -> void:
@@ -69,6 +70,20 @@ func _process_movement() -> void:
 	next_path_position = nav_agent.get_next_path_position()
 	var direction: Vector3 = global_position.direction_to(next_path_position)
 	var target_velocity: Vector3 = direction * MOVEMENT_SPEED
+	
+	
+	
+	
+	var target_rotation = direction.signed_angle_to(Vector3.MODEL_FRONT, Vector3.DOWN)
+	
+	var ROTATION_SPEED: float = 0.4
+	
+	if abs(target_rotation-rotation.y) > deg_to_rad(60):
+		ROTATION_SPEED = 2.0
+		
+	rotation.y = move_toward(rotation.y, target_rotation, ROTATION_SPEED)
+	
+	
 	
 	if nav_agent.get_avoidance_enabled():
 		nav_agent.set_velocity(target_velocity)
@@ -125,6 +140,9 @@ func _handle_wrong_treatment() -> void:
 # Navigation
 func _go_home() -> void:
 	
+	nav_agent.set_avoidance_enabled(false)
+
+	
 	Death_Signal.emit()
 	
 	mesh_collision.disabled = true
@@ -151,16 +169,54 @@ func _update_time_display() -> void:
 
 
 # Player interaction
-func _on_player_entered_range(body: Node3D) -> void:
-	if body is Jogador:
-		symptoms_label.show()
-		body.player_ui.Player_Selected_Medicine.connect(_on_medicine_given)
 
 
-func _on_player_left_range(body: Node3D) -> void:
-	if body is Jogador:
-		symptoms_label.hide()
-		body.player_ui.Player_Selected_Medicine.disconnect(_on_medicine_given)
+func On_Player_Aimed_At_Me(Jogador_Reference: Jogador):
+	symptoms_label.show()
+	outline_meshes.show()
+	
+	
+	if not Jogador_Reference.player_ui.Player_Selected_Medicine.is_connected(_on_medicine_given):
+		Jogador_Reference.player_ui.Player_Selected_Medicine.connect(_on_medicine_given)
+
+func On_Player_Stopped_Aiming_At_Me(Jogador_Reference: Jogador):
+	symptoms_label.hide()
+	outline_meshes.hide()
+	
+	if Jogador_Reference.player_ui.Player_Selected_Medicine.is_connected(_on_medicine_given):
+		Jogador_Reference.player_ui.Player_Selected_Medicine.disconnect(_on_medicine_given)
+
+func Isolate_on_Inspection():
+	$Goblin/Cube.set_layer_mask_value(6,true)
+	$Goblin/Cube_002.set_layer_mask_value(6,true)
+	$Goblin/Retopo_Cube_001.set_layer_mask_value(6,true)
+	$Goblin/Cube_001.set_layer_mask_value(6,true)
+	$Goblin/Sphere.set_layer_mask_value(6,true)
+	$Goblin/Retopo_Cube_002.set_layer_mask_value(6,true)
+	$Goblin/Sphere_001.set_layer_mask_value(6,true)
+	
+	
+func Reset_Character_on_Inspection():
+	
+	#$Goblin/Cube.set_layer_mask_value(6,true)
+	#$Goblin/Cube_002.set_layer_mask_value(6,true)
+	#$Goblin/Retopo_Cube_001.set_layer_mask_value(6,true)
+	#$Goblin/Cube_001.set_layer_mask_value(6,true)
+	#$Goblin/Sphere.set_layer_mask_value(6,true)
+	#$Goblin/Retopo_Cube_002.set_layer_mask_value(6,true)
+	#$Goblin/Sphere_001.set_layer_mask_value(6,true)
+	
+	$Goblin/Cube.set_layer_mask_value(6,false)
+	$Goblin/Cube_002.set_layer_mask_value(6,false)
+	$Goblin/Retopo_Cube_001.set_layer_mask_value(6,false)
+	$Goblin/Cube_001.set_layer_mask_value(6,false)
+	$Goblin/Sphere.set_layer_mask_value(6,false)
+	$Goblin/Retopo_Cube_002.set_layer_mask_value(6,false)
+	$Goblin/Sphere_001.set_layer_mask_value(6,false)
+	
+
+
+
 
 
 # Timer callbacks

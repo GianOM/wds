@@ -2,7 +2,7 @@ class_name Jogador extends CharacterBody3D
 
 @onready var player_ui: Control = $PlayerUi
 
-@onready var camera_3d: Camera3D = $Camera3D
+
 
 var Player_Speed: float = 3
 const PLAYER_CAMERA_SPEED: float = 0.001
@@ -14,6 +14,21 @@ var is_Player_Active: bool = false
 
 
 @onready var global_position_debug: RichTextLabel = $"Debug UI/Global_Position_Debug"
+
+@onready var camera_3d: Camera3D = $Camera3D
+@onready var camera_ray_cast_3d: RayCast3D = $Camera3D/Camera_RayCast3D
+
+
+# Possui Cull Mask 6
+#@onready var inspect_camera: Camera3D = $Inspect_Camera
+
+@onready var inspector_camera_pivot: Node3D = $Inspector_Camera_Pivot
+@onready var inspect_camera: Camera3D = $Inspector_Camera_Pivot/Inspect_Camera
+
+var Current_Aimed_Pacient: Paciente
+var Previous_Aimed_Pacient: Paciente
+
+var Inspected_Pacient: Paciente
 
 func _input(event: InputEvent) -> void:
 		
@@ -27,6 +42,31 @@ func _input(event: InputEvent) -> void:
 		
 		mouse_axis = event.relative * PLAYER_CAMERA_SPEED
 		handle_Camera_Movement()
+		
+	elif Input.is_action_just_pressed("Inspect_Key"):
+		
+		if inspect_camera.is_current():
+			
+			Activate_Player()
+			
+			
+			inspector_camera_pivot.Deactivate_Player()
+			
+			Inspected_Pacient.Reset_Character_on_Inspection()
+			
+			
+		else:
+			
+			if Current_Aimed_Pacient != null:
+				
+				Deactivate_Player()
+				
+				Inspected_Pacient = Current_Aimed_Pacient
+				Inspected_Pacient.Isolate_on_Inspection()
+				
+				inspector_camera_pivot.Activate_Player()
+				inspect_camera.set_current(true)
+		
 		
 	
 	
@@ -61,6 +101,12 @@ func _process(delta: float) -> void:
 	
 	global_position_debug.text = str(global_position)
 	
+	if camera_ray_cast_3d.is_colliding():
+		
+		Handle_Camera_Raycast_Collision(camera_ray_cast_3d.get_collider())
+		
+	else:
+		Reset_Raycast_Targets()
 	
 	
 	
@@ -91,4 +137,49 @@ func handle_Camera_Movement():
 	rotation.y -= mouse_axis.x
 	
 	
+func Handle_Camera_Raycast_Collision(Collided_Object: Object):
+	
+	if Collided_Object is Paciente:
+		
+		Current_Aimed_Pacient = Collided_Object
+		Current_Aimed_Pacient.On_Player_Aimed_At_Me(self)
+		
+		
+		# Evita erros na primeira colisao do Player
+		if Previous_Aimed_Pacient == null:
+			
+			Previous_Aimed_Pacient = Collided_Object
+			return
+		
+		
+		if Previous_Aimed_Pacient != Current_Aimed_Pacient:
+			Previous_Aimed_Pacient.On_Player_Stopped_Aiming_At_Me(self)
+			
+		Previous_Aimed_Pacient = Collided_Object
+		
+func Reset_Raycast_Targets():
+	
+	if Current_Aimed_Pacient != null:
+		Current_Aimed_Pacient.On_Player_Stopped_Aiming_At_Me(self)
+		Current_Aimed_Pacient = null
+		
+	if Previous_Aimed_Pacient != null:
+		Previous_Aimed_Pacient.On_Player_Stopped_Aiming_At_Me(self)
+		Previous_Aimed_Pacient = null
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	

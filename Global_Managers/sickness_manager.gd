@@ -12,7 +12,6 @@ var REMEDIOS_FOLDER_PATH: String = "res://Doencas/Remedios_Database/"
 var INGREDIENTES_FOLDER_PATH: String = "res://Doencas/Ingredientes_Database/"
 
 
-
 var Doencas_DB: Array
 var Sintomas_DB: Array
 var Remedios_DB: Array
@@ -21,23 +20,57 @@ var Ingredientes_DB: Array
 var Decider_RNG: RandomNumberGenerator = RandomNumberGenerator.new()
 
 
+
+
 func Load_Resources_into_Array(folder_path: String) -> Array:
 	
 	var resources: Array = []
-	var dir :DirAccess = DirAccess.open(folder_path)
+	#
 	
+	if OS.has_feature("editor"):
+		var dir :DirAccess = DirAccess.open(folder_path)
+	#var dir :PackedStringArray = ResourceLoader.list_directory("res://assets/enemies/slime")
 	
-	if dir == null:
-		push_error("Failed to open directory: " + folder_path)
-		return resources
+		if dir == null:
+			
+			push_error("Failed to open directory: " + folder_path)
+			return resources
+			
+		#for file_name in dir:
+		for file_name in dir.get_files():
+			
+			if file_name.ends_with(".tres") or file_name.ends_with(".res"):
+				
+				var full_path = folder_path + "/" + file_name
+				
+				var res = load(full_path)
+				
+				if res:
+					resources.append(res)
+					
+					
+	else:
+		var dir :PackedStringArray = ResourceLoader.list_directory(folder_path)
+	
+		if dir == null:
+			
+			push_error("Failed to open directory: " + folder_path)
+			return resources
+			
+		for file_name in dir:
+		#for file_name in dir.get_files():
+			
+			if file_name.ends_with(".tres") or file_name.ends_with(".res"):
+				
+				var full_path = folder_path + "/" + file_name
+				
+				var res = ResourceLoader.load(full_path)
+				
+				if res:
+					resources.append(res)
 		
-		
-	for file_name in dir.get_files():
-		if file_name.ends_with(".tres") or file_name.ends_with(".res"):
-			var full_path = folder_path + "/" + file_name
-			var res = load(full_path)
-			if res:
-				resources.append(res)
+					
+					
 	return resources
 	
 	
@@ -143,7 +176,7 @@ func Montar_os_Ingredientes_dos_Remedios():
 	for meu_remedio in Remedios_DB:
 		
 		#WARNING: Usado apenas para debuggar
-		#meu_remedio.Quantidade = 99
+		meu_remedio.Quantidade = 99
 		
 		for i in range(Decider_RNG.randi_range(meu_remedio.Range_de_Ingredientes.x, meu_remedio.Range_de_Ingredientes.y)):
 			

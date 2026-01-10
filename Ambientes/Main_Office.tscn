@@ -14,8 +14,10 @@ ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 sky_material = SubResource("ProceduralSkyMaterial_comex")
 
 [sub_resource type="Environment" id="Environment_aybpn"]
-background_mode = 2
+background_mode = 1
+background_color = Color(0.49747366, 0.49747366, 0.49747366, 1)
 sky = SubResource("Sky_pm0r7")
+ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 1
 tonemap_exposure = 0.85
 ssao_enabled = true
@@ -41,6 +43,7 @@ environment = SubResource("Environment_aybpn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1283126226]
 transform = Transform3D(-0.89962983, -0.43365112, -0.051117454, -0.025674263, -0.0643313, 0.99759835, -0.43589813, 0.89878166, 0.046740677, 0, 5.7141623, 0)
+layers = 33
 light_energy = 0.583
 light_specular = 3.504
 shadow_enabled = true
@@ -78,6 +81,7 @@ curve = SubResource("Curve3D_sjkx1")
 [node name="Pacients_Manager" parent="." unique_id=1675392447 node_paths=PackedStringArray("fila_path", "Pacients_Spawn_Points") instance=ExtResource("3_aybpn")]
 fila_path = NodePath("../Fila_de_Pacientes")
 Pacients_Spawn_Points = [NodePath("../NPCs Spawn_Points/Spawn_Point_00"), NodePath("../NPCs Spawn_Points/Spawn_Point_01"), NodePath("../NPCs Spawn_Points/Spawn_Point_02"), NodePath("../NPCs Spawn_Points/Spawn_Point_03")]
+Pacient_Cooldown_Timer = 3.0
 
 [node name="Main_Office_Navigation_Zone" type="NavigationRegion3D" parent="." unique_id=1862104724]
 navigation_mesh = ExtResource("4_e2ln7")

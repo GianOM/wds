@@ -22,8 +22,17 @@ var RNG: RandomNumberGenerator = RandomNumberGenerator.new()
 
 @export var Pacients_Spawn_Points: Array[Marker3D]
 
+@export var Pacient_Cooldown_Timer: float = 30.0
+
+
+@onready var spawn_timer: Timer = $Spawn_Timer
+
 
 func _ready() -> void:
+	
+	spawn_timer.set_wait_time(Pacient_Cooldown_Timer)
+	spawn_timer.start()
+
 	
 	fila_curve = fila_path.get_curve()
 	fila_points = fila_curve.get_baked_points()
@@ -92,7 +101,7 @@ func _on_pacient_freed():
 
 
 # Helper methods
-func _create_patient_instance(edit_state: int = PackedScene.GEN_EDIT_STATE_INSTANCE) -> Paciente:
+func _create_patient_instance(edit_state: int = PackedScene.GEN_EDIT_STATE_DISABLED) -> Paciente:
 	return PACIENT_SCENE.instantiate(edit_state)
 	
 func point_from_curve_index() -> Vector3:
