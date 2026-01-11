@@ -14,7 +14,6 @@ var is_Player_Active: bool = false
 
 
 @onready var global_position_debug: RichTextLabel = $"Debug UI/Global_Position_Debug"
-
 @onready var camera_3d: Camera3D = $Camera3D
 @onready var camera_ray_cast_3d: RayCast3D = $Camera3D/Camera_RayCast3D
 
@@ -27,13 +26,16 @@ var Previous_Aimed_Pacient: Paciente
 
 var Inspected_Pacient: Paciente
 
+
+var is_Camera_Inverted: bool = false
+
 func _input(event: InputEvent) -> void:
 		
 	
 	if event is InputEventMouseMotion and is_Player_Active:
 		# event.relative is the delta since the last mouse motion event
 		
-		if player_ui.book_ui.is_visible_in_tree() or player_ui.remedio_craft_ui.is_visible_in_tree():
+		if player_ui.book_ui.is_visible_in_tree() or player_ui.remedio_craft_ui.is_visible_in_tree() or player_ui.upgrade_screen_ui.is_visible_in_tree():
 			return
 		
 		
@@ -123,10 +125,17 @@ func handle_Player_Movement(Delta_Time: float):
 		
 func handle_Camera_Movement():
 	
+	if is_Camera_Inverted:
+		camera_3d.rotation.x += mouse_axis.y
+		camera_3d.rotation.x = clamp(camera_3d.rotation.x, -1.5, 1.5)
+		rotation.y += mouse_axis.x
+		return
+	
+	
 	camera_3d.rotation.x -= mouse_axis.y
 	camera_3d.rotation.x = clamp(camera_3d.rotation.x, -1.5, 1.5)
-	
 	rotation.y -= mouse_axis.x
+	
 	
 	
 func Handle_Camera_Raycast_Collision(Collided_Object: Object):

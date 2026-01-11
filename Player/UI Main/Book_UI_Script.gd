@@ -55,8 +55,8 @@ func _on_close_pressed() -> void:
 	close.disabled = true
 	close.visible = false
 	book.play("close_book")
-	await book.animation_finished
-	book.hide()
+	#await book.animation_finished
+	#book.hide()
 	
 	
 	book.reset_pages()

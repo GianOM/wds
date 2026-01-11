@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Invert_Camera" format=3 uid="uid://cetfrekfklpqy"]
+
+[ext_resource type="Texture2D" uid="uid://cygk2fgosjvab" path="res://icon.svg" id="1_35huw"]
+[ext_resource type="Script" uid="uid://dpkxldqr5w0h0" path="res://Upgrades/Invert_Player_Camera.gd" id="1_d5ju6"]
+
+[resource]
+script = ExtResource("1_d5ju6")
+Upgrade_Icon = ExtResource("1_35huw")
+Upgrade_name = &"Invert Player Camera"
+description = "Inverts the Player Camera"
+metadata/_custom_type_script = "uid://dpkxldqr5w0h0"

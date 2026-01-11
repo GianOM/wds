@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://fhmqgvj1ck2d"]
+
+[ext_resource type="Texture2D" uid="uid://cygk2fgosjvab" path="res://icon.svg" id="1_fxr3h"]
+[ext_resource type="Script" uid="uid://db4c1a0f65jg1" path="res://Player/UI Main/upgrade_details_ui.gd" id="1_sqgcc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sqgcc"]
+bg_color = Color(0.12591082, 0.12591085, 0.12591076, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.6501282, 0.6501283, 0.65012807, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vga40"]
+bg_color = Color(0.34338918, 0.18734062, 0.42428437, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[node name="UpgradeDetailsUI" type="Control" unique_id=885128910]
+z_index = 5
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sqgcc")
+
+[node name="Outside" type="PanelContainer" parent="." unique_id=1769809340]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="." unique_id=338500078]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -334.25
+offset_top = -200.0
+offset_right = 334.25
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sqgcc")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=793991324]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -304.0
+offset_top = -169.0
+offset_right = -176.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = ExtResource("1_fxr3h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="." unique_id=1748837439]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = -158.0
+offset_right = 286.0
+offset_bottom = -113.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme_override_font_sizes/font_size = 30
+text = "AAAAAAAAAAA"
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="." unique_id=1516472600]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = -94.0
+offset_right = 286.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+
+[node name="CancelButton" type="Button" parent="." unique_id=354374539]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -282.0
+offset_top = 119.0
+offset_right = -125.0
+offset_bottom = 151.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_vga40")
+text = "Cancel"
+
+[node name="BuyButton" type="Button" parent="." unique_id=295469320]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 122.0
+offset_top = 119.0
+offset_right = 279.0
+offset_bottom = 151.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_vga40")
+text = "Buy"
+
+[connection signal="gui_input" from="Outside" to="." method="_on_outside_gui_input"]
+[connection signal="pressed" from="CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="BuyButton" to="." method="_on_buy_button_pressed"]

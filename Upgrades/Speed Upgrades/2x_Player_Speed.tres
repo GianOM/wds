@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Speed_Upgrades" format=3 uid="uid://bemmjfi0mu3j4"]
+
+[ext_resource type="Script" uid="uid://dlagy6ox41aja" path="res://Upgrades/Speed Upgrades/Speed_Upgrades.gd" id="1_8nint"]
+[ext_resource type="Texture2D" uid="uid://cygk2fgosjvab" path="res://icon.svg" id="1_jp4xd"]
+
+[resource]
+script = ExtResource("1_8nint")
+Speed_Multiplier = 2.0
+Upgrade_Icon = ExtResource("1_jp4xd")
+Upgrade_name = &"2X Speed"
+description = "Increase Upgrade Speed"
+metadata/_custom_type_script = "uid://dlagy6ox41aja"

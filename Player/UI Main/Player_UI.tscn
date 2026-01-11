@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dlat2nvnjf0hk" path="res://Player/UI Main/Remedio_Craft_UI.tscn" id="2_4lx8f"]
 [ext_resource type="PackedScene" uid="uid://c26er124fn78f" path="res://Player/UI Main/Book_UI.tscn" id="2_dk53m"]
 [ext_resource type="Texture2D" uid="uid://crexve50u28re" path="res://Player/UI Main/Crosshair.png" id="4_eo7ep"]
+[ext_resource type="PackedScene" uid="uid://edo4fgxvdvf3" path="res://Player/UI Main/upgrade_screen_ui.tscn" id="4_ogqap"]
 
 [node name="PlayerUi" type="Control" unique_id=2019658007]
 layout_mode = 3
@@ -19,6 +20,10 @@ visible = false
 layout_mode = 1
 
 [node name="Book_UI" parent="." unique_id=868782864 instance=ExtResource("2_dk53m")]
+visible = false
+layout_mode = 1
+
+[node name="UpgradeScreenUI" parent="." unique_id=2008517145 instance=ExtResource("4_ogqap")]
 visible = false
 layout_mode = 1
 

@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://edo4fgxvdvf3"]
+
+[ext_resource type="PackedScene" uid="uid://cs05g8ua4dqni" path="res://Player/UI Main/upgrade_button.tscn" id="1_3h16t"]
+[ext_resource type="Script" uid="uid://civycn184crgc" path="res://Player/UI Main/upgrade_screen_ui.gd" id="1_x8pgo"]
+[ext_resource type="Resource" uid="uid://bemmjfi0mu3j4" path="res://Upgrades/Speed Upgrades/2x_Player_Speed.tres" id="3_otsbs"]
+[ext_resource type="PackedScene" uid="uid://fhmqgvj1ck2d" path="res://Player/UI Main/upgrade_details_ui.tscn" id="3_x8pgo"]
+[ext_resource type="Resource" uid="uid://q1n47vgrkdlw" path="res://Upgrades/Speed Upgrades/4x_Player_Speed.tres" id="4_x5goo"]
+[ext_resource type="Resource" uid="uid://cetfrekfklpqy" path="res://Upgrades/INVERT.tres" id="5_x5goo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u70ni"]
+bg_color = Color(0.078431375, 0.10980392, 0.20392157, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.6357997, 0.63579935, 0.6357993, 1)
+
+[node name="UpgradeScreenUI" type="Control" unique_id=2008517145]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x8pgo")
+
+[node name="Background" type="Panel" parent="." unique_id=1245286251]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u70ni")
+
+[node name="Label" type="Label" parent="." unique_id=1405213755]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -598.5
+offset_top = 45.0
+offset_right = 598.5
+offset_bottom = 87.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Upgrades"
+horizontal_alignment = 1
+
+[node name="Stats" type="Label" parent="." unique_id=1819392622]
+layout_mode = 0
+offset_left = 1025.0
+offset_top = 43.0
+offset_right = 1229.0
+offset_bottom = 108.0
+text = "stats"
+
+[node name="UpgradeButton" parent="." unique_id=1256504531 instance=ExtResource("1_3h16t")]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 338.0
+offset_right = 168.0
+offset_bottom = 438.0
+Upgrade_Data_Resource = ExtResource("3_otsbs")
+
+[node name="UpgradeButton2" parent="UpgradeButton" unique_id=1433767150 instance=ExtResource("1_3h16t")]
+layout_mode = 0
+offset_left = 178.0
+offset_top = -68.0
+offset_right = 278.0
+offset_bottom = 32.0
+Upgrade_Data_Resource = ExtResource("4_x5goo")
+
+[node name="UpgradeButton4" parent="UpgradeButton/UpgradeButton2" unique_id=1836306312 instance=ExtResource("1_3h16t")]
+layout_mode = 0
+offset_left = 184.0
+offset_top = -68.0
+offset_right = 284.0
+offset_bottom = 32.0
+Upgrade_Data_Resource = ExtResource("3_otsbs")
+
+[node name="UpgradeButton6" parent="UpgradeButton/UpgradeButton2/UpgradeButton4" unique_id=1210876474 instance=ExtResource("1_3h16t")]
+layout_mode = 0
+offset_left = 188.0
+offset_right = 288.0
+Upgrade_Data_Resource = ExtResource("4_x5goo")
+
+[node name="UpgradeButton5" parent="UpgradeButton/UpgradeButton2" unique_id=1963547482 instance=ExtResource("1_3h16t")]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 46.0
+offset_right = 284.0
+offset_bottom = 146.0
+Upgrade_Data_Resource = ExtResource("3_otsbs")
+
+[node name="UpgradeButton7" parent="UpgradeButton/UpgradeButton2/UpgradeButton5" unique_id=454692992 instance=ExtResource("1_3h16t")]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 2.0
+offset_right = 288.0
+offset_bottom = 102.0
+Upgrade_Data_Resource = ExtResource("4_x5goo")
+
+[node name="UpgradeButton3" parent="UpgradeButton" unique_id=1042003290 instance=ExtResource("1_3h16t")]
+layout_mode = 0
+offset_left = 177.0
+offset_top = 82.0
+offset_right = 277.0
+offset_bottom = 182.0
+Upgrade_Data_Resource = ExtResource("5_x5goo")
+
+[node name="UpgradeButton6" parent="UpgradeButton/UpgradeButton3" unique_id=1876162829 instance=ExtResource("1_3h16t")]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 64.0
+offset_right = 284.0
+offset_bottom = 164.0
+Upgrade_Data_Resource = ExtResource("4_x5goo")
+
+[node name="UpgradeButton8" parent="UpgradeButton/UpgradeButton3/UpgradeButton6" unique_id=165067746 instance=ExtResource("1_3h16t")]
+layout_mode = 0
+offset_left = 188.0
+offset_top = -32.0
+offset_right = 288.0
+offset_bottom = 68.0
+Upgrade_Data_Resource = ExtResource("3_otsbs")
+
+[node name="UpgradeButton9" parent="UpgradeButton/UpgradeButton3/UpgradeButton6" unique_id=1703124653 instance=ExtResource("1_3h16t")]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 77.0
+offset_right = 288.0
+offset_bottom = 177.0
+Upgrade_Data_Resource = ExtResource("4_x5goo")
+
+[node name="UpgradeDetailsUI" parent="." unique_id=885128910 instance=ExtResource("3_x8pgo")]
+visible = false
+layout_mode = 1

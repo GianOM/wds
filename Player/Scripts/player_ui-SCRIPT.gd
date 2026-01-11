@@ -2,10 +2,17 @@ extends Control
 
 signal Player_Selected_Medicine(Medicine_Name: String)
 
+
+@onready var Player_Pointer: Jogador = $".."
+
+
+
+
 @onready var glossario_resumo: Array[String]
 @onready var indice: GridContainer = $Indice
 
 @onready var book_ui: Control = $Book_UI
+@onready var upgrade_screen_ui: Control = $UpgradeScreenUI
 
 
 var Local_Sickness_DB: Array
@@ -28,54 +35,101 @@ var Total_Time: float = 0.0
 @onready var in_game_metrics: Control = $In_Game_Metrics
 
 
+func close_all_uis():
+	book_ui.hide()
+	upgrade_screen_ui.hide()
+	remedio_craft_ui.hide()
+	indice.hide()
+
 @warning_ignore("unused_parameter")
 func _input(event: InputEvent) -> void:
-		
-		
-	if Input.is_action_just_pressed("Book_Key"):
-		
-		if remedio_craft_ui.is_visible_in_tree():
-			remedio_craft_ui.hide()
-		
-		
-		Load_Remedios_Nomes()
-		
+	
+	if Input.is_action_just_pressed("Upgrade_Screen"):
+		if upgrade_screen_ui.is_visible_in_tree():
+			upgrade_screen_ui.hide()
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else: 
+			close_all_uis()
+			upgrade_screen_ui.show()
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+	
+	elif Input.is_action_just_pressed("Book_Key"):
 		if book_ui.is_visible_in_tree():
-			
-			
-			book_ui.hide()
 			book_ui.close.pressed.emit()
+			await book_ui.book.animation_finished
+			book_ui.hide()
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			indice.hide()
-			
-			
+			#close_all_uis()
 		else:
-			
-			
+			close_all_uis()
+			Load_Remedios_Nomes()
 			book_ui.show()
 			book_ui.Open_Book()
-			indice.show()
-			
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			
+			indice.show()
+
+	
 	elif Input.is_action_just_pressed("Recipe_Book_Key"):
-		
-		if book_ui.is_visible_in_tree():
-			book_ui.hide()
-			book_ui.close.pressed.emit()
-			indice.hide()
-		
 		if remedio_craft_ui.is_visible_in_tree():
 			remedio_craft_ui.hide()
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			
 		else:
+			close_all_uis()
 			remedio_craft_ui.show()
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		
+
+	#if Input.is_action_just_pressed("Upgrade_Screen"):
+		#if upgrade_screen_ui.is_visible_in_tree():
+			#upgrade_screen_ui.hide()
+			#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		#else:
+			#upgrade_screen_ui.show()
+			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#
+	#if Input.is_action_just_pressed("Book_Key"):
+		#
+		#if remedio_craft_ui.is_visible_in_tree():
+			#remedio_craft_ui.hide()
+		#
+		#
+		#Load_Remedios_Nomes()
+		#
+		#if book_ui.is_visible_in_tree():
+			#
+			#
+			#book_ui.hide()
+			#book_ui.close.pressed.emit()
+			#indice.hide()
+			#
+			#
+		#else:
+			#
+			#
+			#book_ui.show()
+			#book_ui.Open_Book()
+			#indice.show()
+			#
+			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			#
+	#elif Input.is_action_just_pressed("Recipe_Book_Key"):
+		#
+		#if book_ui.is_visible_in_tree():
+			#book_ui.hide()
+			#book_ui.close.pressed.emit()
+			#indice.hide()
+		#
+		#if remedio_craft_ui.is_visible_in_tree():
+			#remedio_craft_ui.hide()
+			#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			#
+		#else:
+			#remedio_craft_ui.show()
+			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		#
 		
 
-func _on_Book_Closed():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func Show_Recipes():
 	remedio_craft_ui.show()
@@ -95,7 +149,7 @@ func Hide_Recipes():
 func _ready() -> void:
 	
 	
-	book_ui.close.pressed.connect(_on_Book_Closed)
+	#book_ui.close.pressed.connect(_on_Book_Closed)
 	
 	Local_Sickness_DB = SicknessManager.Doencas_DB
 	Local_Remedios_DB = SicknessManager.Remedios_DB
