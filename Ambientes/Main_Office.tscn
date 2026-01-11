@@ -81,7 +81,7 @@ curve = SubResource("Curve3D_sjkx1")
 [node name="Pacients_Manager" parent="." unique_id=1675392447 node_paths=PackedStringArray("fila_path", "Pacients_Spawn_Points") instance=ExtResource("3_aybpn")]
 fila_path = NodePath("../Fila_de_Pacientes")
 Pacients_Spawn_Points = [NodePath("../NPCs Spawn_Points/Spawn_Point_00"), NodePath("../NPCs Spawn_Points/Spawn_Point_01"), NodePath("../NPCs Spawn_Points/Spawn_Point_02"), NodePath("../NPCs Spawn_Points/Spawn_Point_03")]
-Pacient_Cooldown_Timer = 3.0
+Pacient_Cooldown_Timer = 4000.0
 
 [node name="Main_Office_Navigation_Zone" type="NavigationRegion3D" parent="." unique_id=1862104724]
 navigation_mesh = ExtResource("4_e2ln7")

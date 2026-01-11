@@ -16,6 +16,7 @@ script = ExtResource("1_6wvox")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1394942, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cauldron2" unique_id=1662897754]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cauldron2/StaticBody3D" unique_id=1008919832]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4154657, 0)

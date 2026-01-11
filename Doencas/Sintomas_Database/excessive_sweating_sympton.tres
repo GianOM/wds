@@ -6,4 +6,5 @@
 script = ExtResource("1_ma3kt")
 Symptom_Name = &"Excessive Sweating"
 Symptoms_Commonality = 0.03
+My_Body_Part = 2
 metadata/_custom_type_script = "uid://bayu1c1r6mrnh"

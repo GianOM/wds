@@ -22,6 +22,8 @@ var sickness: Doenca
 var has_move_target: bool = false
 var next_path_position: Vector3 = Vector3.ZERO
 
+var is_Character_being_Inspected: bool = false
+
 # Node references
 @onready var nav_agent: NavigationAgent3D = $Pacient_NavAgent
 @onready var debug_mesh: MeshInstance3D = $Debug_Mesh
@@ -33,6 +35,7 @@ var next_path_position: Vector3 = Vector3.ZERO
 
 @onready var mesh_collision: CollisionShape3D = $Mesh_Collision
 @onready var outline_meshes: Node3D = $Outline_Meshes
+@onready var inspector_camera_pivot: Node3D = $Inspector_Camera_Pivot
 
 
 func _ready() -> void:
@@ -187,12 +190,16 @@ func On_Player_Stopped_Aiming_At_Me(Jogador_Reference: Jogador):
 		Jogador_Reference.player_ui.Player_Selected_Medicine.disconnect(_on_medicine_given)
 
 func Isolate_on_Inspection():
+	
+	is_Character_being_Inspected = true
+	$Mesh_Collision.disabled = true
+	
 	$Goblin/Cube.set_layer_mask_value(6,true)
 	$Goblin/Cube_002.set_layer_mask_value(6,true)
 	$Goblin/Retopo_Cube_001.set_layer_mask_value(6,true)
 	$Goblin/Cube_001.set_layer_mask_value(6,true)
 	$Goblin/Sphere.set_layer_mask_value(6,true)
-	$Goblin/Retopo_Cube_002.set_layer_mask_value(6,true)
+	$Goblin/Retopo_Cube_003.set_layer_mask_value(6,true)
 	$Goblin/Sphere_001.set_layer_mask_value(6,true)
 	
 	
@@ -206,16 +213,23 @@ func Reset_Character_on_Inspection():
 	#$Goblin/Retopo_Cube_002.set_layer_mask_value(6,true)
 	#$Goblin/Sphere_001.set_layer_mask_value(6,true)
 	
+	is_Character_being_Inspected = false
+	$Mesh_Collision.disabled = false
+	symptoms_label.hide()
+	
 	$Goblin/Cube.set_layer_mask_value(6,false)
 	$Goblin/Cube_002.set_layer_mask_value(6,false)
 	$Goblin/Retopo_Cube_001.set_layer_mask_value(6,false)
 	$Goblin/Cube_001.set_layer_mask_value(6,false)
 	$Goblin/Sphere.set_layer_mask_value(6,false)
-	$Goblin/Retopo_Cube_002.set_layer_mask_value(6,false)
+	$Goblin/Retopo_Cube_003.set_layer_mask_value(6,false)
 	$Goblin/Sphere_001.set_layer_mask_value(6,false)
 	
 
 
+func Activate_Inspection():
+	Isolate_on_Inspection()
+	inspector_camera_pivot.Activate_Player()
 
 
 

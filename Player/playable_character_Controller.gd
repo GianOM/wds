@@ -22,9 +22,6 @@ var is_Player_Active: bool = false
 # Possui Cull Mask 6
 #@onready var inspect_camera: Camera3D = $Inspect_Camera
 
-@onready var inspector_camera_pivot: Node3D = $Inspector_Camera_Pivot
-@onready var inspect_camera: Camera3D = $Inspector_Camera_Pivot/Inspect_Camera
-
 var Current_Aimed_Pacient: Paciente
 var Previous_Aimed_Pacient: Paciente
 
@@ -45,27 +42,22 @@ func _input(event: InputEvent) -> void:
 		
 	elif Input.is_action_just_pressed("Inspect_Key"):
 		
-		if inspect_camera.is_current():
+		if camera_3d.is_current():
 			
-			Activate_Player()
-			
-			
-			inspector_camera_pivot.Deactivate_Player()
-			
-			Inspected_Pacient.Reset_Character_on_Inspection()
+			if Current_Aimed_Pacient != null:
+				
+					Deactivate_Player()
+					
+					Inspected_Pacient = Current_Aimed_Pacient
+					Inspected_Pacient.Activate_Inspection()
+					
 			
 			
 		else:
 			
-			if Current_Aimed_Pacient != null:
-				
-				Deactivate_Player()
-				
-				Inspected_Pacient = Current_Aimed_Pacient
-				Inspected_Pacient.Isolate_on_Inspection()
-				
-				inspector_camera_pivot.Activate_Player()
-				inspect_camera.set_current(true)
+			Activate_Player()
+			Inspected_Pacient.Reset_Character_on_Inspection()
+			
 		
 		
 	

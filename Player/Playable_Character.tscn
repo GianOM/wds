@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://12c1kqyqrqyj"]
 
 [ext_resource type="Script" uid="uid://dj0nco5t7wqpr" path="res://Player/playable_character_Controller.gd" id="1_sxeib"]
-[ext_resource type="Script" uid="uid://bw8dlys7wtlny" path="res://Player/inspector_camera_pivot.gd" id="2_kwotx"]
 [ext_resource type="PackedScene" uid="uid://b8ab6fnxmsdfm" path="res://Player/UI Main/Player_UI.tscn" id="2_q6p28"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_drl1l"]
@@ -17,13 +16,6 @@ size = Vector3(1.5498047, 1.8137207, 1.8537598)
 
 [node name="PlayableCharacter" type="CharacterBody3D" unique_id=1531290082]
 script = ExtResource("1_sxeib")
-
-[node name="Inspector_Camera_Pivot" type="Node3D" parent="." unique_id=670891496]
-script = ExtResource("2_kwotx")
-
-[node name="Inspect_Camera" type="Camera3D" parent="Inspector_Camera_Pivot" unique_id=1070267197]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-cull_mask = 32
 
 [node name="Debug UI" type="Control" parent="." unique_id=1624859416]
 layout_mode = 3

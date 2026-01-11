@@ -1,12 +1,11 @@
 extends Node3D
 
 
-@onready var playable_character: Jogador = $".."
-
-
-
-
+@onready var Pacient_Root: Paciente = $".."
 @onready var camera_3d: Camera3D = $Inspect_Camera
+@onready var inpect_ray_cast: RayCast3D = $Inspect_Camera/InpectRayCast
+
+
 
 var _rotation_x: float = 0.0
 var _rotation_y: float = 0.0
@@ -35,15 +34,10 @@ var can_Player_move: bool = false
 
 var last_mouse_relative: Vector2 = Vector2.ZERO
 
-
-var Character_Camera_Offeset: Vector3 = Vector3.ZERO
-
-	
-	
+#func _ready() -> void:
+	#Activate_Player()
 	
 func Activate_Player():
-	
-	Character_Camera_Offeset = Vector3.ZERO
 	
 	can_Player_move = true
 	Can_I_Zoom = true
@@ -110,9 +104,12 @@ func _process(delta: float) -> void:
 	# Checkamos se a camera é a atual para evitar o player mover a camera quando em 1ª Pessoa
 	if camera_3d.is_current():
 		
-		global_position = playable_character.Inspected_Pacient.global_position + Character_Camera_Offeset
+		Pacient_Root.symptoms_label.show()
 		
-	
+		#global_position = playable_character.Inspected_Pacient.global_position + Character_Camera_Offeset
+		
+		update_raycast_to_mouse()
+		
 		var Mouse_Position:Vector2 = get_viewport().get_mouse_position()
 		var Delta_Mouse_Pos:Vector2 = -last_mouse_relative
 		
@@ -134,10 +131,35 @@ func _process(delta: float) -> void:
 			var Right :Vector3 = camera_3d.global_transform.basis.x * mouse_pan_sensitivity
 			var Up :Vector3 = camera_3d.global_transform.basis.y * mouse_pan_sensitivity
 			
-			Character_Camera_Offeset += Right * Delta_Mouse_Pos.x - Up * Delta_Mouse_Pos.y
+			global_position += Right * Delta_Mouse_Pos.x - Up * Delta_Mouse_Pos.y
 			
 			
 			
 		last_mouse_relative = Vector2.ZERO
 		
 	
+
+
+
+	
+
+func update_raycast_to_mouse():
+	# Get mouse position on screen
+	var mouse_pos = get_viewport().get_mouse_position()
+	
+	# Project ray from camera through mouse position
+	var from = camera_3d.project_ray_origin(mouse_pos)
+	var to = from + camera_3d.project_ray_normal(mouse_pos) * 1024
+	
+	# Set raycast origin and target
+	#raycast.global_position = from
+	inpect_ray_cast.target_position = inpect_ray_cast.to_local(to)
+	
+	# Force raycast update
+	inpect_ray_cast.force_raycast_update()
+	
+	# Optional: Check if raycast hit something
+	if inpect_ray_cast.is_colliding():
+		var collision_point = inpect_ray_cast.get_collision_point()
+		var collider = inpect_ray_cast.get_collider()
+		print("Hit: ", collider.name, " at ", collision_point)

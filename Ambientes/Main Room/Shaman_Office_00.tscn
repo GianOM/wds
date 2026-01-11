@@ -38,51 +38,61 @@ points = PackedVector3Array(0.38869613, 2.4435024, 9.970467, -0.23445803, -2.541
 [node name="Main Room Models" parent="." unique_id=1805665759 instance=ExtResource("2_ra5ux")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Main Room Models/Cube_002" parent_id_path=PackedInt32Array(1805665759, 149466875) index="0" unique_id=252339088]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Main Room Models/Cube_002/StaticBody3D" unique_id=2094858863]
 shape = SubResource("ConvexPolygonShape3D_mcy1m")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Main Room Models/Cylinder" parent_id_path=PackedInt32Array(1805665759, 878883875) index="0" unique_id=167403091]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Main Room Models/Cylinder/StaticBody3D" unique_id=23698800]
 shape = SubResource("ConvexPolygonShape3D_ra5ux")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Main Room Models/Table" parent_id_path=PackedInt32Array(1805665759, 1415344745) index="0" unique_id=380600165]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Main Room Models/Table/StaticBody3D" unique_id=1409348130]
 shape = SubResource("ConvexPolygonShape3D_fqf2y")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Main Room Models/Maca" parent_id_path=PackedInt32Array(1805665759, 851947712) index="0" unique_id=1966966572]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Main Room Models/Maca/StaticBody3D" unique_id=1412163007]
 shape = SubResource("ConvexPolygonShape3D_chph6")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Main Room Models/Cabinet" parent_id_path=PackedInt32Array(1805665759, 888169837) index="0" unique_id=993028513]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Main Room Models/Cabinet/StaticBody3D" unique_id=1250518272]
 shape = SubResource("ConvexPolygonShape3D_kkrya")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Main Room Models/Floor" parent_id_path=PackedInt32Array(1805665759, 1269375917) index="0" unique_id=605304339]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Main Room Models/Floor/StaticBody3D" unique_id=1153018082]
 shape = SubResource("ConvexPolygonShape3D_y8lni")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Main Room Models/Walls Entrance" parent_id_path=PackedInt32Array(1805665759, 1855666286) index="0" unique_id=1064050544]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Main Room Models/Walls Entrance/StaticBody3D" unique_id=898416720]
 shape = SubResource("ConcavePolygonShape3D_rhx71")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Main Room Models/Wall1" parent_id_path=PackedInt32Array(1805665759, 641774574) index="0" unique_id=1552591798]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Main Room Models/Wall1/StaticBody3D" unique_id=389873283]
 shape = SubResource("ConvexPolygonShape3D_j0h5w")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Main Room Models/Wall2" parent_id_path=PackedInt32Array(1805665759, 292250636) index="0" unique_id=1787521296]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Main Room Models/Wall2/StaticBody3D" unique_id=228140124]
 shape = SubResource("ConvexPolygonShape3D_lfoqu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Main Room Models/Wall3" parent_id_path=PackedInt32Array(1805665759, 1945958478) index="0" unique_id=1955699508]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Main Room Models/Wall3/StaticBody3D" unique_id=1034537605]
 shape = SubResource("ConvexPolygonShape3D_finwm")
